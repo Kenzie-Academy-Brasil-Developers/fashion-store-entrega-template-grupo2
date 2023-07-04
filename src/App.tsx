@@ -1,9 +1,12 @@
+import { Header } from "./components/Header";
+//import { Dashboard } from "./components/pages/Dashboard";
+import { ProductPage } from "./components/pages/ProductPage";
+
 function App() {
   return (
     <div>
-      <p className="font-oswald text-5xl text-primary absolute bottom-1/2 left-1/2 -translate-x-1/2 ">
-        Bom trabalho, galera! :)
-      </p>
+      <Header/>
+      <ProductPage/>
     </div>
   );
 }
