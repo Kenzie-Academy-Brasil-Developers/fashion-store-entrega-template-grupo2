@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { AddProductModal } from "./components/AddProductModal";
 import { EditProductModal } from "./components/EditCardModal";
 import { Cart } from "./components/Cart";
@@ -31,6 +32,16 @@ function App() {
 >>>>>>> origin/dev-alvaro
     </div>
 >>>>>>> origin/dev-virgynia
+=======
+import { Register } from "./components/pages/SignUp";
+// import { LoginUser } from "./components/pages/Login";
+
+function App() {
+  return (
+    <>
+    <Register/>
+    </>
+>>>>>>> origin/dev-luis
   );
 }
 
