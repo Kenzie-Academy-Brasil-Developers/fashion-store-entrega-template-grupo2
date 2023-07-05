@@ -1,19 +1,15 @@
-import { useRef } from "react";
+import { RefObject } from "react";
 import { BiPencil } from "react-icons/bi";
 
-export const EditProductModal = () => {
-  const modal = useRef<HTMLDialogElement>(null);
+interface IEditProductModal {
+  editModal: RefObject<HTMLDialogElement>;
+}
+
+export const EditProductModal = ({ editModal }: IEditProductModal) => {
   return (
     <>
-      <button
-        onClick={() => modal.current?.showModal()}
-        className="btn btn-sm btn-primary w-fit self-end rounded-none text-xs font-oswald font-thin px-8 h-10 tracking-widest"
-      >
-        <BiPencil className="text-lg" />
-        EDITAR PRODUTO
-      </button>
       <dialog
-        ref={modal}
+        ref={editModal}
         className="modal w-5/6 sm:w-2/3 md:w-1/2 lg:w-1/3 mx-auto"
       >
         <form method="dialog" className="modal-box pt-20">
@@ -27,20 +23,20 @@ export const EditProductModal = () => {
             <input
               type="text"
               placeholder="Nome"
-              className="input input-bordered w-full bg-base-300 font-oswald placeholder:text-gray-500 uppercase"
+              className="font-oswald input w-full bg-gray-100 uppercase placeholder:text-gray-500"
             />
             <input
               type="text"
               placeholder="Preço (R$)"
-              className="input input-bordered w-full bg-base-300 font-oswald placeholder:text-gray-500 uppercase"
+              className="font-oswald input w-full bg-gray-100 uppercase placeholder:text-gray-500"
             />
             <input
               type="text"
               placeholder="Imagem (URL)"
-              className="input input-bordered w-full bg-base-300 font-oswald placeholder:text-gray-500 uppercase"
+              className="font-oswald input w-full bg-gray-100 uppercase placeholder:text-gray-500"
             />
             <textarea
-              className="textarea textarea-bordered w-full bg-base-300 font-oswald placeholder:text-gray-500 uppercase resize-none"
+              className="textarea textarea-bordered w-full bg-gray-100 font-oswald placeholder:text-gray-500 uppercase resize-none"
               placeholder="Descrição resumida"
             ></textarea>
             <button className="btn btn-sm btn-primary w-fit self-end rounded-none text-xs font-oswald font-thin px-8 h-10 tracking-widest">
