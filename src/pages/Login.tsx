@@ -1,6 +1,6 @@
 import { Logo } from "../components/Logo";
 import { Footer } from "../components/Footer";
-import { FormLogin } from "../components/LoginFormValidation/FormLogin";
+import { FormLogin } from "../validation/LoginFormValidation/FormLogin";
 
 export const Login = () => {
   return (
