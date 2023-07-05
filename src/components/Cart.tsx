@@ -14,7 +14,7 @@ export const Cart: React.FC<ICartProps> = ({ children }) => {
       <div className="drawer-content">
         <ShoppingNavbar />
         {children}
-        <Footer absolute={false} />
+        <Footer />
       </div>
       <div className="drawer-side z-20">
         <label htmlFor="my-drawer-4" className="drawer-overlay"></label>

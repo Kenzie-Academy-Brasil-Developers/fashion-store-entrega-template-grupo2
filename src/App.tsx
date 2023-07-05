@@ -1,7 +1,12 @@
+import { RoutesMain } from "./routes/RoutesMain";
+import { Cart } from "./components/Cart";
+
 function App() {
   return (
     <>
-      <div>Bom trabalho</div>
+      <Cart>
+        <RoutesMain />
+      </Cart>
     </>
   );
 }
