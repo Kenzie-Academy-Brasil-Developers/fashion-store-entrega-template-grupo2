@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import { CartProductCard } from "./CartProductCard";
+import { Footer } from "./Footer";
+import { ShoppingNavbar } from "./ShoppingNavbar";
 
 interface ICartProps {
   children: ReactNode;
@@ -10,18 +11,14 @@ export const Cart: React.FC<ICartProps> = ({ children }) => {
   return (
     <div className="drawer drawer-end">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex gap-3">
+      <div className="drawer-content">
+        <ShoppingNavbar />
         {children}
-        <label
-          htmlFor="my-drawer-4"
-          className="cursor-pointer flex items-center"
-        >
-          <AiOutlineShoppingCart className="text-3xl" />
-        </label>
+        <Footer absolute={false} />
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side z-20">
         <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
-        <ul className="menu p-4 pt-20 w-80 h-full bg-base-200 text-base-content flex flex-col gap-8">
+        <ul className="menu p-4 pt-20 w-80 h-full bg-base-200 text-base-content flex flex-col gap-8 z-20">
           <label
             htmlFor="my-drawer-4"
             className="btn btn-sm text-lg btn-circle btn-ghost absolute right-2 top-1"

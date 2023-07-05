@@ -1,10 +1,9 @@
-import { RoutesMain } from "./routes/routesMain";
-
 function App() {
   return (
     <>
-      <RoutesMain/>
+      <div>Bom trabalho</div>
     </>
-  )  
-} 
+  );
+}
+
 export default App;

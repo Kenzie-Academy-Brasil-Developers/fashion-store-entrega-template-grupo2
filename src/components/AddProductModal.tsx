@@ -1,19 +1,15 @@
-import { useRef } from "react";
+import { RefObject } from "react";
 import { BsPlusCircle } from "react-icons/bs";
 
-export const AddProductModal = () => {
-  const modal = useRef<HTMLDialogElement>(null);
+interface IAddProductModal {
+  addModal: RefObject<HTMLDialogElement>;
+}
+
+export const AddProductModal = ({ addModal }: IAddProductModal) => {
   return (
     <>
-      <button
-        onClick={() => modal.current?.showModal()}
-        className="btn btn-sm btn-primary w-fit self-end rounded-none text-xs font-oswald font-thin px-8 h-10 tracking-widest"
-      >
-        <BsPlusCircle className="text-lg" />
-        NOVO PRODUTO
-      </button>
       <dialog
-        ref={modal}
+        ref={addModal}
         className="modal w-5/6 sm:w-2/3 md:w-1/2 lg:w-1/3 mx-auto"
       >
         <form method="dialog" className="modal-box pt-20">
