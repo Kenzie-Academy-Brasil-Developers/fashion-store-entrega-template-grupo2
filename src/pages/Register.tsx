@@ -1,6 +1,6 @@
 import { Logo } from "../components/Logo";
 import { Footer } from "../components/Footer";
-import { FormRegister } from "../components/RegisterFormValidation/FormRegister";
+import { FormRegister } from "../validation/RegisterFormValidation/FormRegister";
 
 export const Register = () => {
   return (
