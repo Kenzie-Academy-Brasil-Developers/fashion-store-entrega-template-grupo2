@@ -2,7 +2,7 @@ import { DashboardNavbar } from "../components/DashboardNavbar";
 import { Footer } from "../components/Footer";
 import { Logo } from "../components/Logo";
 
-export const Dashboard = () => {
+export const DashboardHome = () => {
   return (
     <>
       <main className="lg:w-full w-screen min-h-screen overflow-hidden pb-10 md:pb-0">

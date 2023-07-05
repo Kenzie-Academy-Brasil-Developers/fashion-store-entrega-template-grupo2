@@ -1,11 +1,11 @@
+import { RoutesMain } from "./routes/RoutesMain";
 import { Cart } from "./components/Cart";
-import { Home } from "./pages/Home";
 
 function App() {
   return (
     <>
       <Cart>
-        <Home />
+        <RoutesMain />
       </Cart>
     </>
   );

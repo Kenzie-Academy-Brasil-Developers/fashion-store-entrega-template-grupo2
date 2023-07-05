@@ -1,5 +1,5 @@
 import { BsCartPlus } from "react-icons/bs";
-import { HighlightProductCard } from "../components/HighlightProduct";
+import { HighlightProductCard } from "../components/HighlightProductCard";
 
 interface IProductPage {
   imgSource: string;

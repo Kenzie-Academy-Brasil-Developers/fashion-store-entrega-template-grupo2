@@ -1,4 +1,4 @@
-import { HighlightProductCard } from "../components/HighlightProduct";
+import { HighlightProductCard } from "../components/HighlightProductCard";
 
 export const Home = () => {
   return (
@@ -23,6 +23,11 @@ export const Home = () => {
             Produtos em destaque
           </h2>
           <ul className="w-[90%] md:w-full ml-auto pr-8 md:pr-0 flex flex-row gap-6 overflow-x-auto overflow-y-hidden">
+            <HighlightProductCard
+              productPrice={500}
+              productTitle="Jaqueta Preta"
+              imgSource="https://as1.ftcdn.net/v2/jpg/02/44/18/40/1000_F_244184094_9pHXMx8nxpBvPz0Q6dvT8xGUzFXkSNvS.jpg"
+            />
             <HighlightProductCard
               productPrice={500}
               productTitle="Jaqueta Preta"
