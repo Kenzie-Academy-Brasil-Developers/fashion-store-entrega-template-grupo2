@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { ProductContext } from "../providers/ProductContext";
 
 interface ICartProductCardProps {
   productTitle: string;
@@ -16,7 +16,8 @@ export const CartProductCard = ({
   productId,
   imgSource,
 }: ICartProductCardProps) => {
-  const { selectId, toggleCartModal, removeCartItem } = useContext(CartContext);
+  const { selectId, toggleCartModal, removeCartItem } =
+    useContext(ProductContext);
 
   return (
     <li

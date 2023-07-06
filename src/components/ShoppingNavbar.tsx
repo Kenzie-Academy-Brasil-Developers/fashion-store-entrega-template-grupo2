@@ -1,12 +1,12 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { CartContext } from "../context/CartContext";
-import { IProduct } from "../context/CartContext";
+import { ProductContext } from "../providers/ProductContext";
+import { IProduct } from "../providers/ProductContext";
 import { BiUserCircle } from "react-icons/bi";
 
 export const ShoppingNavbar = () => {
-  const { cartProducts, toggleCartModal } = useContext(CartContext);
+  const { cartProducts, toggleCartModal } = useContext(ProductContext);
   const [cartCount, setCartCount] = useState<Number>(0);
 
   useEffect(() => {

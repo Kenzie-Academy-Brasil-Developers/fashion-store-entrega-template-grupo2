@@ -9,10 +9,10 @@ import {
   MouseEvent,
   MutableRefObject,
 } from "react";
-import { api } from "../services/Api";
+import { api } from "../services/api";
 import { useNavigate, NavigateFunction } from "react-router-dom";
 
-interface ICartContextProps {
+interface IProductContextProps {
   children: ReactNode;
 }
 
@@ -25,7 +25,7 @@ export interface IProduct {
   quantity: number;
 }
 
-interface ICartContext {
+interface IProductContext {
   products: IProduct[];
   setProducts: Dispatch<SetStateAction<IProduct[]>>;
   selectId: (e: MouseEvent<HTMLElement>) => void;
@@ -33,17 +33,17 @@ interface ICartContext {
   setSelectedProduct: Dispatch<SetStateAction<IProduct | undefined>>;
   selectedProductId: string | undefined;
   navigate: NavigateFunction;
-  addToCart: () => void;
   setSelectedProductId: Dispatch<SetStateAction<string | undefined>>;
+  addToCart: () => void;
   cartProducts: [] | IProduct[];
   cartModal: MutableRefObject<HTMLInputElement>;
   toggleCartModal: () => void;
   removeCartItem: (e: MouseEvent<HTMLElement>) => void;
 }
 
-export const CartContext = createContext({} as ICartContext);
+export const ProductContext = createContext({} as IProductContext);
 
-export const CartProvider = ({ children }: ICartContextProps) => {
+export const ProductProvider = ({ children }: IProductContextProps) => {
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const [products, setProducts] = useState<IProduct[]>([]);
   const [cartProducts, setCartProducts] = useState<IProduct[] | []>([]);
@@ -127,7 +127,7 @@ export const CartProvider = ({ children }: ICartContextProps) => {
 
   return (
     <>
-      <CartContext.Provider
+      <ProductContext.Provider
         value={{
           products,
           setProducts,
@@ -145,7 +145,7 @@ export const CartProvider = ({ children }: ICartContextProps) => {
         }}
       >
         {children}
-      </CartContext.Provider>
+      </ProductContext.Provider>
     </>
   );
 };
