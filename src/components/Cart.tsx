@@ -3,19 +3,20 @@ import { CartProductCard } from "./CartProductCard";
 import { Footer } from "./Footer";
 import { ShoppingNavbar } from "./ShoppingNavbar";
 import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { ProductContext } from "../providers/ProductContext";
 
 interface ICartProps {
   children: ReactNode;
 }
 
 export const Cart: React.FC<ICartProps> = ({ children }) => {
-  const { cartProducts, cartModal, toggleCartModal } = useContext(CartContext);
+  const { cartProducts, cartModal, toggleCartModal } =
+    useContext(ProductContext);
 
   return (
     <div className="drawer drawer-end">
       <input ref={cartModal} type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
+      <div className="drawer-content overflow-hidden">
         <ShoppingNavbar />
         {children}
         <Footer />

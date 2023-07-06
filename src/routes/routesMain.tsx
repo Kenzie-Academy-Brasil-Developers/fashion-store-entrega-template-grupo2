@@ -6,10 +6,10 @@ import { Login } from "../pages/Login";
 import { ProductPage } from "../pages/ProductPage";
 import { Register } from "../pages/Register";
 import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { ProductContext } from "../providers/ProductContext";
 
 export const RoutesMain = () => {
-  const { selectedProduct } = useContext(CartContext);
+  const { selectedProduct } = useContext(ProductContext);
   return (
     <Routes>
       <Route path="login" element={<Login />} />

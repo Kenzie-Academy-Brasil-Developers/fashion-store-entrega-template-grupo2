@@ -3,14 +3,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./styles/index.css";
-import { CartProvider } from "./context/CartContext.tsx";
+import { ProductProvider } from "./providers/ProductContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
-      <CartProvider>
+      <ProductProvider>
         <App />
-      </CartProvider>
+      </ProductProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
