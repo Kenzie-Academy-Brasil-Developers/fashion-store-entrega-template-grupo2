@@ -29,9 +29,16 @@ export const Cart: React.FC<ICartProps> = ({ children }) => {
           >
             ✕
           </label>
-          <h1 className="font-oswald font-semibold text-xl absolute left-5 top-5 tracking-wide">
-            CARRINHO
+          <h1 className="left-5 top-5 text-xl uppercase font-oswald font-semibold absolute tracking-wide">
+            Carrinho
           </h1>
+          <span
+            className={`${
+              cartProducts.length >= 1 ? "hidden" : ""
+            } absolute right-1/2 top-1/2 translate-x-1/2 -translate-y-1/2 text-center text-2xl font-roboto text-gray-400`}
+          >
+            Não há itens no carrinho :(
+          </span>
           {cartProducts.map((product) => {
             return (
               <CartProductCard

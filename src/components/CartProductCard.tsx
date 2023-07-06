@@ -39,7 +39,10 @@ export const CartProductCard = ({
       </div>
       <div className="flex flex-col gap-6 items-start justify-center">
         <h1
-          onClick={selectId}
+          onClick={(e) => {
+            selectId(e);
+            toggleCartModal();
+          }}
           className="font-oswald link-hover cursor-pointer"
         >
           {productTitle}
