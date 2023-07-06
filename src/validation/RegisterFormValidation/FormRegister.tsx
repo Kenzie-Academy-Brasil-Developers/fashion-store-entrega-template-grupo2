@@ -2,12 +2,27 @@ import { Link } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { BiArrowBack } from "react-icons/bi";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  registerFormSchema,
-  TRegisterFormValues,
-} from "./RegisterSchemaResolver";
+import { registerFormSchema, TRegisterFormValues} from "./RegisterSchemaResolver";
+import { useContext, useState } from "react";
+
+import { UserContext, loginAdmProps, registerAdmProps } from "../../context/AdminContext";
+
+interface IAdmin{
+  id: number
+  name: string
+  email: string
+}
+
+interface IUserContext{
+  loading: boolean
+  user:  IAdmin 
+  LoginAdm: (formData : loginAdmProps) => Promise<void>
+  RegisterAdm: (formData : registerAdmProps) => Promise<void>
+  AdminLogout:() => Promise<void>
+}
 
 export const FormRegister = () => {
+  const [ isLoading, setIsLoading ] = useState(false)
   const {
     register,
     handleSubmit,
@@ -15,14 +30,20 @@ export const FormRegister = () => {
   } = useForm<TRegisterFormValues>({
     resolver: zodResolver(registerFormSchema),
   });
-  const onSubmit: SubmitHandler<TRegisterFormValues> = (data) =>
-    console.log(data);
+
+
+  const {loading} = useContext<any | IUserContext>(UserContext)
+  console.log(loading);
+  
+  const onSubmit = async (formData : registerAdmProps ) => {
+    // RegisterAdm (formData, setIsLoading)
+  };
 
   return (
     <>
       <form
         className="w-full lg:max-w-sm flex flex-col gap-5 mr-auto"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(registerAdm)}
       >
         <Link
           to="/login"
