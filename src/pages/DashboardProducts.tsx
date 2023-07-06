@@ -5,17 +5,37 @@ import { Footer } from "../components/Footer";
 import { DashboardProductCard } from "../components/DashboardProductCard";
 import { EditProductModal } from "../components/EditProductModal";
 import { AddProductModal } from "../components/AddProductModal";
-import { useRef } from "react";
+
+import { useContext, useEffect, useRef, useState } from "react";
+import { ProductContext } from "../providers/ProductContext";
+//import { AdminContext } from "../context/AdminContext/AdminContext";
 
 export const DashboardProducts = () => {
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    window.scroll(0, 0);
+
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 300);
+    return () => clearTimeout(timeout);
+  }, []);
+
   const addModal = useRef<HTMLDialogElement>(null);
   const editModal = useRef<HTMLDialogElement>(null);
 
+  const {products} = useContext(ProductContext)
+
   return (
     <>
-      <main className="lg:w-full w-screen min-h-screen pb-10 md:pb-0">
-        <Logo />
-        <div className="flex flex-col gap-10 w-5/6 mx-auto">
+      <Logo />
+      <main className="w-5/6 mx-auto min-h-screen pb-10">
+        <div
+          className={`${
+            loading ? "translate-y-3" : ""
+          } flex flex-col gap-10 transition-all duration-1000`}
+        >
           <DashboardNavbar />
           <EditProductModal editModal={editModal} />
           <AddProductModal addModal={addModal} />
@@ -39,31 +59,19 @@ export const DashboardProducts = () => {
             </button>
           </div>
           <ul className="grid grid-cols-1 md:grid-cols-2 mx-auto gap-10 w-full list-none">
-            <DashboardProductCard
-              productName="Produto da loja"
-              productPrice={400}
-              imgSource="https://icr.usp.br/wp-content/uploads/2017/12/picture.jpg"
-              editModal={editModal}
-            />
-
-            <DashboardProductCard
-              productName="Produto da loja"
-              productPrice={400}
-              imgSource="https://icr.usp.br/wp-content/uploads/2017/12/picture.jpg"
-              editModal={editModal}
-            />
-            <DashboardProductCard
-              productName="Produto da loja"
-              productPrice={400}
-              imgSource="https://icr.usp.br/wp-content/uploads/2017/12/picture.jpg"
-              editModal={editModal}
-            />
-            <DashboardProductCard
-              productName="Produto da loja"
-              productPrice={400}
-              imgSource="https://icr.usp.br/wp-content/uploads/2017/12/picture.jpg"
-              editModal={editModal}
-            />
+            {
+              products.map(product=>(
+                <DashboardProductCard
+                  key={product.id}
+                  productName={product.name}
+                  productPrice={Number(product.price)}
+                  productDescription = {product.description}
+                  imgSource={product.image}
+                  editModal={editModal}
+                  productId={product.id}
+                />
+              ))
+            }
           </ul>
         </div>
       </main>

@@ -1,13 +1,29 @@
 import { DashboardNavbar } from "../components/DashboardNavbar";
 import { Footer } from "../components/Footer";
 import { Logo } from "../components/Logo";
+import { useEffect, useState } from "react";
 
 export const DashboardHome = () => {
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    window.scroll(0, 0);
+
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 300);
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
     <>
-      <main className="lg:w-full w-screen min-h-screen overflow-hidden pb-10 md:pb-0">
-        <Logo />
-        <div className="flex flex-col gap-10 w-5/6 mx-auto">
+      <Logo />
+      <main className="w-5/6 mx-auto min-h-screen pb-10">
+        <div
+          className={`${
+            loading ? "translate-y-3" : ""
+          } flex flex-col gap-10 transition-all duration-1000`}
+        >
           <DashboardNavbar />
           <h1 className="text-4xl md:text-6xl font-medium font-oswald">
             PAINEL DO ADMINISTRADOR

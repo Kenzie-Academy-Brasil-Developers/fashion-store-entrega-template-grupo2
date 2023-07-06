@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL:"https://fashion-store-api.onrender.com"
-})
+  baseURL: "http://localhost:3001",
+});
