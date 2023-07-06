@@ -1,11 +1,12 @@
 import { MdOutlineEdit } from "react-icons/md";
 import { TfiTrash } from "react-icons/tfi";
 import { RefObject, useContext } from "react";
-import { AdminContext } from "../context/AdminContext/AdminContext";
+import { ProductContext } from "../providers/ProductContext";
 
 interface IDashboardProductCard {
   productName: string;
   productPrice: number;
+  productDescription: string;
   imgSource: string;
   productId: number;
   editModal: RefObject<HTMLDialogElement>;
@@ -14,11 +15,24 @@ interface IDashboardProductCard {
 export const DashboardProductCard = ({
   productName,
   productPrice,
+  productDescription,
   imgSource,
   productId,
   editModal,
 }: IDashboardProductCard) => {
-  const {deleteProduct} = useContext(AdminContext)
+  const {deleteProduct, setEditingProduct, editingProduct} = useContext(ProductContext)
+
+  const editingThisProduct = () =>{
+      setEditingProduct({
+        name: productName,
+        price: productPrice,
+        image: imgSource,
+        description: productDescription,
+        id: productId
+      })
+      console.log(editingProduct)
+      editModal.current?.showModal()
+  }
 
   return (
     <li className=" flex lg:justify-between  lg:mx-0 gap-10">
@@ -37,7 +51,7 @@ export const DashboardProductCard = ({
         </div>
       </div>
       <div className="flex gap-10 md:gap-4">
-        <button onClick={() => editModal.current?.showModal()}>
+        <button onClick={() => editingThisProduct()}>
           <MdOutlineEdit size="2.25rem" />
         </button>
         <button onClick={()=> deleteProduct(productId)}>

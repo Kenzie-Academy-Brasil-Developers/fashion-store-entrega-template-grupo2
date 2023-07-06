@@ -6,26 +6,27 @@ import { Login } from "../pages/Login";
 import { ProductPage } from "../pages/ProductPage";
 import { Register } from "../pages/Register";
 import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
-import { AdminProvider } from "../context/AdminContext/AdminContext";
+import { ProductContext } from "../providers/ProductContext";
+//import { AdminProvider } from "../context/AdminContext/AdminContext";
 
 export const RoutesMain = () => {
-  const { selectedProduct } = useContext(CartContext);
+  const { products } = useContext(ProductContext);
   return (
     <Routes>
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
       <Route path="dashboard/home" element={<DashboardHome />} />
       <Route path="dashboard/products" element={
-        <AdminProvider>
         <DashboardProducts/>
-      </AdminProvider>
       } />
       <Route path="/" element={<Home />} />
-      <Route
-        path={`product/${selectedProduct?.id}`}
-        element={<ProductPage />}
-      />
+      {products.map((product) => (
+        <Route
+          key={product.id}
+          path={`product/${product.id}`}
+          element={<ProductPage product={product} />}
+        />
+      ))}
     </Routes>
   );
 };

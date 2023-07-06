@@ -9,10 +9,13 @@ import {
   MouseEvent,
   MutableRefObject,
 } from "react";
-import { api } from "../services/Api";
+import { api } from "../services/api";
 import { useNavigate, NavigateFunction } from "react-router-dom";
+import { toast} from "react-toastify";
+import { TAddProductForm } from "../components/AddProductForm/addProductFormSchema";
+import { TEditProductForm } from "../components/EditProductForm/editProductFormSchema";
 
-interface ICartContextProps {
+interface IProductContextProps {
   children: ReactNode;
 }
 
@@ -22,31 +25,93 @@ export interface IProduct {
   price: number;
   description: string;
   image: string;
-  quantity: number;
+  quantity?: number;
 }
 
-interface ICartContext {
+interface IProductContext {
   products: IProduct[];
   setProducts: Dispatch<SetStateAction<IProduct[]>>;
   selectId: (e: MouseEvent<HTMLElement>) => void;
-  selectedProduct: IProduct | undefined;
-  setSelectedProduct: Dispatch<SetStateAction<IProduct | undefined>>;
   selectedProductId: string | undefined;
   navigate: NavigateFunction;
-  addToCart: () => void;
   setSelectedProductId: Dispatch<SetStateAction<string | undefined>>;
+  addToCart: () => void;
   cartProducts: [] | IProduct[];
   cartModal: MutableRefObject<HTMLInputElement>;
   toggleCartModal: () => void;
   removeCartItem: (e: MouseEvent<HTMLElement>) => void;
+  addProduct: (formData: TAddProductForm) => Promise<void>
+  deleteProduct: (productId: number) => Promise<void>
+  editProduct: (formData: TEditProductForm, productId: number) => Promise<void>
+  editingProduct: IProduct | null
+  setEditingProduct: Dispatch<SetStateAction<IProduct | null>>
 }
 
-export const CartContext = createContext({} as ICartContext);
+export const ProductContext = createContext({} as IProductContext);
 
-export const CartProvider = ({ children }: ICartContextProps) => {
+export const ProductProvider = ({ children }: IProductContextProps) => {
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const [products, setProducts] = useState<IProduct[]>([]);
   const [cartProducts, setCartProducts] = useState<IProduct[] | []>([]);
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsdmFyb0BtYWlsLmNvbSIsImlhdCI6MTY4ODY2NjQwNCwiZXhwIjoxNjg4NjcwMDA0LCJzdWIiOiIyIn0.7cG5pCWJrKj2dnyieUtdEw4iLGy4k_UZQdUyk0veMD0"
+
+  const [editingProduct, setEditingProduct] = useState<IProduct | null>(null)
+
+  const addProduct = async (formData: TAddProductForm) =>{
+    try {
+        const{data} = await api.post("/products", formData, {
+          headers:{
+            Authorization: `Bearer ${token}`
+          }
+        })
+        setProducts((products)=>[...products, data])
+        toast.success(`Produto ${data.name} cadastrado com sucesso`)
+    } catch (error) {
+        toast.error(""+error)
+    }
+}
+
+const deleteProduct = async (productId:number) =>{
+    try {
+        await api.delete(`/products/${productId}`,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        setProducts((products)=>products.filter(product => product.id !== productId))
+        toast.success("Produto deletado com sucesso")
+    } catch (error) {
+        toast.error(""+error)
+    }
+}
+
+const editProduct = async (formData: TEditProductForm, productId:number) =>{
+    try {
+        await api.put(`/products/${productId}`, formData,{
+          headers:{
+            Authorization: `Bearer ${token}`
+          }
+        })
+        setProducts((products)=>products.map(product=>{
+          if(productId === product.id){
+            const editedProduct ={
+
+              name: formData.name, 
+              price: Number(formData.price), 
+              description: formData.description,
+              image: formData.image,
+              id: productId
+          }
+            return {...product, ...editedProduct}
+          }else{
+            return product;
+          }
+        }))
+        toast.success("Produto atualizado com sucesso")
+    } catch (error) {
+        toast.error(""+error)
+    }
+}
 
   const [selectedProductId, setSelectedProductId] = useState<
     string | undefined
@@ -61,6 +126,7 @@ export const CartProvider = ({ children }: ICartContextProps) => {
   const selectId = (e: MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
     const productId = target.closest("li")?.id;
+    console.log(productId);
     setSelectedProductId(productId);
   };
   const removeCartItem = (e: MouseEvent<HTMLElement>) => {
@@ -127,14 +193,12 @@ export const CartProvider = ({ children }: ICartContextProps) => {
 
   return (
     <>
-      <CartContext.Provider
+      <ProductContext.Provider
         value={{
           products,
           setProducts,
           selectId,
           selectedProductId,
-          selectedProduct,
-          setSelectedProduct,
           navigate,
           setSelectedProductId,
           addToCart,
@@ -142,10 +206,15 @@ export const CartProvider = ({ children }: ICartContextProps) => {
           cartModal: cartModal as MutableRefObject<HTMLInputElement>,
           toggleCartModal,
           removeCartItem,
+          addProduct,
+          editProduct,
+          deleteProduct,
+          editingProduct,
+          setEditingProduct
         }}
       >
         {children}
-      </CartContext.Provider>
+      </ProductContext.Provider>
     </>
   );
 };

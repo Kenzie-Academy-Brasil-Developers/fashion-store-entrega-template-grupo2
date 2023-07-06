@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { ProductContext } from "../providers/ProductContext";
 
 interface ICartProductCardProps {
   productTitle: string;
@@ -16,7 +16,8 @@ export const CartProductCard = ({
   productId,
   imgSource,
 }: ICartProductCardProps) => {
-  const { selectId, toggleCartModal, removeCartItem } = useContext(CartContext);
+  const { selectId, toggleCartModal, removeCartItem } =
+    useContext(ProductContext);
 
   return (
     <li
@@ -29,8 +30,8 @@ export const CartProductCard = ({
         </span>
         <div
           onClick={(e) => {
-            selectId(e);
             toggleCartModal();
+            selectId(e);
           }}
           className="rounded-md overflow-hidden w-16 h-16 cursor-pointer"
         >
@@ -40,8 +41,8 @@ export const CartProductCard = ({
       <div className="flex flex-col gap-6 items-start justify-center">
         <h1
           onClick={(e) => {
-            selectId(e);
             toggleCartModal();
+            selectId(e);
           }}
           className="font-oswald link-hover cursor-pointer"
         >
