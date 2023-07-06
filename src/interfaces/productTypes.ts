@@ -20,7 +20,7 @@ export interface IProduct {
   image: string;
 }
 
-export interface IProductCart extends IProduct{
+export interface IProductCart extends IProduct {
   quantity: number;
 }
 

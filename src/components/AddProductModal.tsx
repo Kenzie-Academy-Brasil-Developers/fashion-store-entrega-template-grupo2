@@ -1,5 +1,9 @@
+import { RefObject } from "react";
 import { AddProductForm } from "./AddProductForm";
-import { IAddProductModal } from "../interfaces";
+
+interface IAddProductModal {
+  addModal: RefObject<HTMLDialogElement>;
+}
 
 export const AddProductModal = ({ addModal }: IAddProductModal) => {
   return (

@@ -48,7 +48,7 @@ export const Cart: React.FC<ICartProps> = ({ children }) => {
                 imgSource={product.image}
                 productPrice={product.price}
                 productTitle={product.name}
-                productQuantity={product.quantity!}
+                productQuantity={product.quantity}
               />
             );
           })}
