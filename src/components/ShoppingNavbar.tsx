@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import { IProduct } from "../context/CartContext";
+import { BiUserCircle } from "react-icons/bi";
 
 export const ShoppingNavbar = () => {
   const { cartProducts, toggleCartModal } = useContext(CartContext);
@@ -27,20 +28,25 @@ export const ShoppingNavbar = () => {
         >
           fashionstore
         </Link>
-        <div className="indicator">
-          <span
-            className={`${
-              cartCount !== 0 ? "" : "hidden"
-            } indicator-item badge badge-secondary font-roboto rounded-full text-xs select-none`}
-          >
-            {cartCount.toString()}
-          </span>
-          <label
-            onClick={toggleCartModal}
-            className="cursor-pointer flex items-center"
-          >
-            <AiOutlineShoppingCart className="text-3xl" />
-          </label>
+        <div className="flex gap-7">
+          <Link to="/login">
+            <BiUserCircle className="text-3xl"></BiUserCircle>
+          </Link>
+          <div className="indicator">
+            <span
+              className={`${
+                cartCount !== 0 ? "" : "hidden"
+              } indicator-item badge badge-secondary font-roboto rounded-full text-xs select-none`}
+            >
+              {cartCount.toString()}
+            </span>
+            <label
+              onClick={toggleCartModal}
+              className="cursor-pointer flex items-center"
+            >
+              <AiOutlineShoppingCart className="text-3xl" />
+            </label>
+          </div>
         </div>
       </div>
     </nav>

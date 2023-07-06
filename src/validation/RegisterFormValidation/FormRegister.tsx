@@ -96,7 +96,7 @@ export const FormRegister = () => {
           type="submit"
           className="btn btn-primary font-light rounded-none md:w-40 tracking-widest font-oswald ml-auto"
         >
-          Cadastre-se
+          Cadastrar-se
         </button>
       </form>
     </>

@@ -16,7 +16,6 @@ export const RoutesMain = () => {
       <Route path="register" element={<Register />} />
       <Route path="dashboard/home" element={<DashboardHome />} />
       <Route path="dashboard/products" element={<DashboardProducts />} />
-
       <Route path="/" element={<Home />} />
       <Route
         path={`product/${selectedProduct?.id}`}
