@@ -9,6 +9,7 @@ import { HighlightSection } from "../components/HighlightSection";
 export const ProductPage = ({ product }: { product: IProduct }) => {
   const { selectedProductId, products } = useContext(ProductContext);
 
+
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -17,6 +18,7 @@ export const ProductPage = ({ product }: { product: IProduct }) => {
     setLoading(true);
 
     const filteredArray = products.filter((item) => item.id !== product.id);
+
     setFilteredProducts(filteredArray);
 
     const timeout = setTimeout(() => {

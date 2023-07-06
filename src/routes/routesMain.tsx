@@ -7,6 +7,7 @@ import { ProductPage } from "../pages/ProductPage";
 import { Register } from "../pages/Register";
 import { useContext } from "react";
 import { ProductContext } from "../providers/ProductContext";
+//import { AdminProvider } from "../context/AdminContext/AdminContext";
 
 export const RoutesMain = () => {
   const { products } = useContext(ProductContext);
@@ -15,7 +16,9 @@ export const RoutesMain = () => {
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
       <Route path="dashboard/home" element={<DashboardHome />} />
-      <Route path="dashboard/products" element={<DashboardProducts />} />
+      <Route path="dashboard/products" element={
+        <DashboardProducts/>
+      } />
       <Route path="/" element={<Home />} />
       {products.map((product) => (
         <Route

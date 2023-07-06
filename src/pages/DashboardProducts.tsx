@@ -5,7 +5,10 @@ import { Footer } from "../components/Footer";
 import { DashboardProductCard } from "../components/DashboardProductCard";
 import { EditProductModal } from "../components/EditProductModal";
 import { AddProductModal } from "../components/AddProductModal";
-import { useRef, useState, useEffect } from "react";
+
+import { useContext, useEffect, useRef, useState } from "react";
+import { ProductContext } from "../providers/ProductContext";
+//import { AdminContext } from "../context/AdminContext/AdminContext";
 
 export const DashboardProducts = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -21,6 +24,8 @@ export const DashboardProducts = () => {
 
   const addModal = useRef<HTMLDialogElement>(null);
   const editModal = useRef<HTMLDialogElement>(null);
+
+  const {products} = useContext(ProductContext)
 
   return (
     <>
@@ -54,31 +59,19 @@ export const DashboardProducts = () => {
             </button>
           </div>
           <ul className="grid grid-cols-1 md:grid-cols-2 mx-auto gap-10 w-full list-none">
-            <DashboardProductCard
-              productName="Produto da loja"
-              productPrice={400}
-              imgSource="https://icr.usp.br/wp-content/uploads/2017/12/picture.jpg"
-              editModal={editModal}
-            />
-
-            <DashboardProductCard
-              productName="Produto da loja"
-              productPrice={400}
-              imgSource="https://icr.usp.br/wp-content/uploads/2017/12/picture.jpg"
-              editModal={editModal}
-            />
-            <DashboardProductCard
-              productName="Produto da loja"
-              productPrice={400}
-              imgSource="https://icr.usp.br/wp-content/uploads/2017/12/picture.jpg"
-              editModal={editModal}
-            />
-            <DashboardProductCard
-              productName="Produto da loja"
-              productPrice={400}
-              imgSource="https://icr.usp.br/wp-content/uploads/2017/12/picture.jpg"
-              editModal={editModal}
-            />
+            {
+              products.map(product=>(
+                <DashboardProductCard
+                  key={product.id}
+                  productName={product.name}
+                  productPrice={Number(product.price)}
+                  productDescription = {product.description}
+                  imgSource={product.image}
+                  editModal={editModal}
+                  productId={product.id}
+                />
+              ))
+            }
           </ul>
         </div>
       </main>
