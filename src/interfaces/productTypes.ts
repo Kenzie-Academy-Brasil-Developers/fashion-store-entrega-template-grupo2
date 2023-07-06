@@ -51,8 +51,21 @@ export interface IAddProductModal {
 
 export interface IDisplayedProductProps {
   loading: boolean;
+  product: IProduct;
 }
 
 export interface IEditProductModal {
   editModal: RefObject<HTMLDialogElement>;
+}
+
+export interface IHighlightProductCardProps {
+  imgSource: string;
+  productTitle: string;
+  productPrice: number;
+  productId: number;
+  loading: boolean;
+}
+
+export interface ILoadingSpinnerProps {
+  loading: boolean;
 }

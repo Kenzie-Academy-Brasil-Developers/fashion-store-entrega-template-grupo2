@@ -1,4 +1,4 @@
-import { BsPlusCircle } from "react-icons/bs";
+import { AddProductForm } from "./AddProductForm";
 import { IAddProductModal } from "../interfaces";
 
 export const AddProductModal = ({ addModal }: IAddProductModal) => {
@@ -18,31 +18,7 @@ export const AddProductModal = ({ addModal }: IAddProductModal) => {
           <h3 className="font-oswald font-semibold tracking-wide text-2xl absolute left-6 top-7">
             NOVO PRODUTO
           </h3>
-          <form className="flex flex-col gap-3">
-            <input
-              type="text"
-              placeholder="Nome"
-              className="input input-bordered w-full bg-base-300 font-oswald placeholder:text-gray-500 uppercase"
-            />
-            <input
-              type="text"
-              placeholder="Preço (R$)"
-              className="input input-bordered w-full bg-base-300 font-oswald placeholder:text-gray-500 uppercase"
-            />
-            <input
-              type="text"
-              placeholder="Imagem (URL)"
-              className="input input-bordered w-full bg-base-300 font-oswald placeholder:text-gray-500 uppercase"
-            />
-            <textarea
-              className="textarea textarea-bordered w-full bg-base-300 font-oswald placeholder:text-gray-500 uppercase resize-none"
-              placeholder="Descrição resumida"
-            ></textarea>
-            <button className="btn btn-sm btn-primary w-fit self-end rounded-none text-xs font-oswald font-thin px-8 h-10 tracking-widest">
-              <BsPlusCircle className="text-lg" />
-              NOVO PRODUTO
-            </button>
-          </form>
+          <AddProductForm />
         </div>
       </dialog>
     </>

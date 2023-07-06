@@ -7,6 +7,8 @@ import {
   IDisplayedProductProps,
   IEditProductModal,
   IProductCart,
+  IHighlightProductCardProps, 
+  ILoadingSpinnerProps
 } from "./productTypes";
 
 export {
@@ -18,4 +20,6 @@ export {
   IDisplayedProductProps,
   IEditProductModal,
   IProductCart,
+  IHighlightProductCardProps,
+  ILoadingSpinnerProps
 };
