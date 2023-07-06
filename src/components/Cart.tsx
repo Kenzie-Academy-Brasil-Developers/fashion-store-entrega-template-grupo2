@@ -36,7 +36,7 @@ export const Cart: React.FC<ICartProps> = ({ children }) => {
           <span
             className={`${
               cartProducts.length >= 1 ? "hidden" : ""
-            } absolute right-1/2 top-1/2 translate-x-1/2 -translate-y-1/2 text-center text-2xl font-roboto text-gray-400`}
+            } absolute select-none right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2 text-center text-2xl font-roboto text-gray-400`}
           >
             Não há itens no carrinho :(
           </span>

@@ -1,46 +1,46 @@
 import { useContext } from "react";
-import { ProductContext } from "../providers/ProductContext";
+import { IProduct, ProductContext } from "../providers/ProductContext";
 import { BsCartPlus } from "react-icons/bs";
-import { LoadingSpinner } from "./LoadingSpinner";
 
 interface IDisplayedProductProps {
   loading: boolean;
+  product: IProduct;
 }
 
-export const DisplayedProduct = ({ loading }: IDisplayedProductProps) => {
-  const { selectedProduct, addToCart } = useContext(ProductContext);
+export const DisplayedProduct = ({
+  loading,
+  product,
+}: IDisplayedProductProps) => {
+  const { addToCart } = useContext(ProductContext);
 
   return (
     <>
-      <div className="flex flex-col sm:flex-row gap-10 justify-center items-center">
-        <LoadingSpinner loading={loading} />
-        <div
-          className={`${
-            loading ? "opacity-0 translate-y-3 select-none" : ""
-          } bg-base-200 overflow-hidden rounded-3xl max-h-[30rem] lg:h-[30rem] max-w-[24rem] transition-all duration-1000 relative`}
-        >
+      <div
+        className={`${
+          loading
+            ? "opacity-0 translate-y-3 select-none "
+            : "transition-all duration-1000"
+        } flex flex-col sm:flex-row gap-10 justify-center items-center`}
+      >
+        <div className="bg-base-200 overflow-hidden rounded-3xl max-h-[30rem] lg:h-[30rem] max-w-[24rem]">
           <img
-            src={selectedProduct?.image}
+            src={product.image}
             className="hover:scale-[105%] transition-all duration-300 object-cover w-full h-full"
-            alt={selectedProduct?.name}
+            alt={product.name}
           />
         </div>
-        <div
-          className={`${
-            loading ? "opacity-0 translate-y-3 select-none" : ""
-          } flex flex-col gap-5 md:w-1/3 sm:w-1/2 transition-all duration-1000 relative`}
-        >
+        <div className="flex flex-col gap-5 md:w-1/3 sm:w-1/2 transition-all duration-1000 relative">
           <h3 className="text-base font-roboto font-semibold">
-            {selectedProduct?.name}
+            {product.name}
           </h3>
           <p className="uppercase text-xl font-oswald font-normal">
-            {selectedProduct?.price.toLocaleString("pt-BR", {
+            {product.price.toLocaleString("pt-BR", {
               style: "currency",
               currency: "BRL",
             })}
           </p>
           <p className="text-base font-roboto font-light">
-            {selectedProduct?.description}
+            {product.description}
           </p>
           <button
             disabled={loading}

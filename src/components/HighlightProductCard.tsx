@@ -1,14 +1,12 @@
 import { BsCartPlus } from "react-icons/bs";
 import { useContext } from "react";
 import { ProductContext } from "../providers/ProductContext";
-import { LoadingSpinner } from "./LoadingSpinner";
 
 interface IHighlightProductCardProps {
   imgSource: string;
   productTitle: string;
   productPrice: number;
   productId: number;
-  loading: boolean;
 }
 
 export const HighlightProductCard = ({
@@ -16,7 +14,6 @@ export const HighlightProductCard = ({
   productTitle,
   productPrice,
   productId,
-  loading,
 }: IHighlightProductCardProps) => {
   const { selectId } = useContext(ProductContext);
 
@@ -27,14 +24,11 @@ export const HighlightProductCard = ({
     >
       <div
         onClick={selectId}
-        className="rounded-3xl shrink-0 w-44 lg:w-60 h-48 sm:h-52 md:h-64 lg:h-72 cursor-pointer overflow-hidden relative"
+        className="rounded-3xl shrink-0 w-44 lg:w-60 cursor-pointer overflow-hidden"
       >
-        <LoadingSpinner loading={loading} />
         <img
           src={imgSource}
-          className={`${
-            loading ? "hidden" : ""
-          } w-full h-full hover:scale-[105%] transition-all duration-300`}
+          className="w-full h-full hover:scale-[105%] transition-all duration-1000"
         />
       </div>
       <h3
