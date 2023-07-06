@@ -1,9 +1,12 @@
 import { RoutesMain } from "./routes/routesMain";
+import { Cart } from "./components/Cart";
 
 function App() {
   return (
     <>
-      <RoutesMain />
+      <Cart>
+        <RoutesMain />
+      </Cart>
     </>
   );
 }
