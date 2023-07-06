@@ -1,48 +1,59 @@
 import { BsCartPlus } from "react-icons/bs";
 import { HighlightProductCard } from "../components/HighlightProductCard";
+import { useContext, useEffect, useState } from "react";
+import { CartContext } from "../context/CartContext";
+import { IProduct } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
-interface IProductPage {
-  imgSource: string;
-  productName: string;
-  productDescription: string;
-  productPrice: number;
-}
+export const ProductPage = () => {
+  const { selectedProductId, products, selectedProduct, navigate, addToCart } =
+    useContext(CartContext);
 
-export const ProductPage = ({
-  imgSource,
-  productName,
-  productDescription,
-  productPrice,
-}: IProductPage) => {
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (selectedProduct === undefined) navigate("/");
+    const filteredArray = products.filter(
+      (product) => product.id.toString() !== selectedProductId
+    );
+    setFilteredProducts(filteredArray);
+  }, [selectedProductId]);
+
   return (
     <>
       <main className="w-full mx-auto min-h-screen flex flex-col gap-10 py-16 overflow-hidden">
         <div className="flex gap-3 justify-center text-center uppercase font-oswald text-sm font-medium">
-          <a className="link-hover cursor-pointer">Home</a>
+          <Link to="/" className="link-hover cursor-pointer">
+            Home
+          </Link>
           {">"}
-          <a className="link-hover cursor-pointer">{productName}</a>
+          <a className="select-none">{selectedProduct?.name}</a>
         </div>
-        <div className="w-[85vw] mx-auto flex flex-col sm:flex-row gap-10 justify-center items-center">
-          <div className="overflow-hidden sm:w-[30rem] lg:w-[25rem] sm:h-[35rem] lg:h-[30rem] rounded-2xl">
+        <div className="w-5/6 mx-auto flex flex-col sm:flex-row gap-10 justify-center items-center pb-10">
+          <div className="overflow-hidden rounded-3xl">
             <img
-              src={imgSource}
+              src={selectedProduct?.image}
               className="object-bottom hover:scale-[105%] transition-all duration-300 object-cover"
             />
           </div>
           <div className="flex flex-col gap-5 md:w-1/3 sm:w-1/2">
             <h3 className="text-base font-roboto font-semibold">
-              {productName}
+              {selectedProduct?.name}
             </h3>
             <p className="uppercase text-xl font-oswald font-normal">
-              {productPrice.toLocaleString("pt-BR", {
+              {selectedProduct?.price.toLocaleString("pt-BR", {
                 style: "currency",
                 currency: "BRL",
               })}
             </p>
             <p className="text-base font-roboto font-light">
-              {productDescription}
+              {selectedProduct?.description}
             </p>
-            <button className="btn btn-primary flex-nowrap uppercase gap-3 mt-3 w-fit font-thin tracking-widest font-oswald items-center flex">
+            <button
+              onClick={addToCart}
+              className="btn btn-primary flex-nowrap uppercase gap-3 mt-3 w-fit font-thin tracking-widest font-oswald items-center flex"
+            >
               <BsCartPlus className="text-xl flex-shrink-0" />
               Adicionar ao carrinho
             </button>
@@ -52,37 +63,18 @@ export const ProductPage = ({
           <h2 className="w-5/6 mx-auto md:w-full font-oswald uppercase font-medium text-4xl lg:text-5xl tracking-wide">
             Produtos em destaque
           </h2>
-          <ul className="w-[90%] sm:w-full ml-auto flex flex-row gap-6 overflow-x-auto overflow-y-hidden">
-            <HighlightProductCard
-              productPrice={500}
-              productTitle="Jaqueta Preta"
-              imgSource="https://as1.ftcdn.net/v2/jpg/02/44/18/40/1000_F_244184094_9pHXMx8nxpBvPz0Q6dvT8xGUzFXkSNvS.jpg"
-            />
-            <HighlightProductCard
-              productPrice={500}
-              productTitle="Jaqueta Preta"
-              imgSource="https://as1.ftcdn.net/v2/jpg/02/44/18/40/1000_F_244184094_9pHXMx8nxpBvPz0Q6dvT8xGUzFXkSNvS.jpg"
-            />
-            <HighlightProductCard
-              productPrice={500}
-              productTitle="Jaqueta Preta"
-              imgSource="https://as1.ftcdn.net/v2/jpg/02/44/18/40/1000_F_244184094_9pHXMx8nxpBvPz0Q6dvT8xGUzFXkSNvS.jpg"
-            />
-            <HighlightProductCard
-              productPrice={500}
-              productTitle="Jaqueta Preta"
-              imgSource="https://as1.ftcdn.net/v2/jpg/02/44/18/40/1000_F_244184094_9pHXMx8nxpBvPz0Q6dvT8xGUzFXkSNvS.jpg"
-            />
-            <HighlightProductCard
-              productPrice={500}
-              productTitle="Jaqueta Preta"
-              imgSource="https://as1.ftcdn.net/v2/jpg/02/44/18/40/1000_F_244184094_9pHXMx8nxpBvPz0Q6dvT8xGUzFXkSNvS.jpg"
-            />
-            <HighlightProductCard
-              productPrice={500}
-              productTitle="Jaqueta Preta"
-              imgSource="https://as1.ftcdn.net/v2/jpg/02/44/18/40/1000_F_244184094_9pHXMx8nxpBvPz0Q6dvT8xGUzFXkSNvS.jpg"
-            />
+          <ul className="w-[93%] sm:w-full pr-6 sm:pr-0 ml-auto flex flex-row gap-6 overflow-x-auto overflow-y-hidden">
+            {filteredProducts.map((product) => {
+              return (
+                <HighlightProductCard
+                  key={product.id}
+                  productPrice={product.price}
+                  productTitle={product.name}
+                  imgSource={product.image}
+                  productId={product.id}
+                />
+              );
+            })}
           </ul>
         </div>
       </main>

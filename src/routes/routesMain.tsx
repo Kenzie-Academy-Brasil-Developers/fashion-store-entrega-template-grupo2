@@ -5,8 +5,11 @@ import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { ProductPage } from "../pages/ProductPage";
 import { Register } from "../pages/Register";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 export const RoutesMain = () => {
+  const { selectedProduct } = useContext(CartContext);
   return (
     <Routes>
       <Route path="login" element={<Login />} />
@@ -16,15 +19,8 @@ export const RoutesMain = () => {
 
       <Route path="/" element={<Home />} />
       <Route
-        path="product"
-        element={
-          <ProductPage
-            productName="Jaqueta Preta"
-            productDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-            productPrice={500}
-            imgSource="https://thumb.braavo.me/saint/1000/1861767334.webp"
-          />
-        }
+        path={`product/${selectedProduct?.id}`}
+        element={<ProductPage />}
       />
     </Routes>
   );
