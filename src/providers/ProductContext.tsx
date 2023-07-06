@@ -3,6 +3,7 @@ import {
   useRef,
   useEffect,
   createContext,
+<<<<<<< Updated upstream
   ReactNode,
   Dispatch,
   SetStateAction,
@@ -38,6 +39,14 @@ interface IProductContext {
   toggleCartModal: () => void;
   removeCartItem: (e: MouseEvent<HTMLElement>) => void;
 }
+=======
+  MouseEvent,
+  MutableRefObject,
+} from "react";
+import { api } from "../services/Api";
+import { useNavigate } from "react-router-dom";
+import { IProduct, IProductContext, IProductContextProps } from "../interfaces/index"
+>>>>>>> Stashed changes
 
 export const ProductContext = createContext({} as IProductContext);
 
@@ -59,7 +68,10 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
   const selectId = (e: MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
     const productId = target.closest("li")?.id;
+<<<<<<< Updated upstream
     console.log(productId);
+=======
+>>>>>>> Stashed changes
     setSelectedProductId(productId);
   };
   const removeCartItem = (e: MouseEvent<HTMLElement>) => {
@@ -132,6 +144,11 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
           setProducts,
           selectId,
           selectedProductId,
+<<<<<<< Updated upstream
+=======
+          selectedProduct,
+          setSelectedProduct,
+>>>>>>> Stashed changes
           navigate,
           setSelectedProductId,
           addToCart,

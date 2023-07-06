@@ -7,6 +7,7 @@ interface IHighlightProductCardProps {
   productTitle: string;
   productPrice: number;
   productId: number;
+  loading: boolean;
 }
 
 export const HighlightProductCard = ({

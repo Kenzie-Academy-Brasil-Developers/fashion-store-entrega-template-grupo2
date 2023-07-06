@@ -2,7 +2,11 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../providers/ProductContext";
+<<<<<<< Updated upstream
 import { IProduct } from "../providers/ProductContext";
+=======
+import { IProductCart } from "../interfaces";
+>>>>>>> Stashed changes
 import { BiUserCircle } from "react-icons/bi";
 
 export const ShoppingNavbar = () => {
@@ -10,8 +14,13 @@ export const ShoppingNavbar = () => {
   const [cartCount, setCartCount] = useState<Number>(0);
 
   useEffect(() => {
+<<<<<<< Updated upstream
     const itemTotal = (cartProducts as IProduct[]).reduce(
       (accumulator: number, product: IProduct) => {
+=======
+    const itemTotal = (cartProducts as IProductCart[]).reduce(
+      (accumulator: number, product: IProductCart) => {
+>>>>>>> Stashed changes
         return accumulator + product.quantity;
       },
       0

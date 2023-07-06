@@ -1,17 +1,12 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { IProduct } from "../../../interfaces";
 
-interface IProduct {
-  id: number;
-  name: string;
-  price: number;
-  description: string;
-  image: string;
-}
 
-export const ProductCard = () => {
+export const ProductCard = () => { 
+const products: IProduct[] = []
   return (
     <>
-      {products.map((product) => (
+      {products.map((product: IProduct) => (
         <li key={product.id} className="flex flex-col w-64 gap-5">
           {/* <link to={`/products/${product.id}`}> */}
           <h3 className="font-oswald font-extrabold tracking-wide">
@@ -36,41 +31,41 @@ export const ProductCard = () => {
 
 //Array mockado
 
-const products: IProduct[] = [
-  {
-    id: 1,
-    name: "Blazer Branco Elegante",
-    price: 490,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin massa metus, tempus nec ex ac, condimentum convallis diam. Donec at nisi lorem. Aliquam non dolor bibendum, venenatis ante ac, lobortis justo. Vestibulum nec pretium mi, eu consequat dolor.",
-    image:
-      "https://res.cloudinary.com/dsbkp5841/image/upload/v1687807062/Rectangle_4_hwrkgf.jpg",
-  },
-  {
-    id: 2,
-    name: "Blazer Laranja",
-    price: 320,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin massa metus, tempus nec ex ac, condimentum convallis diam. Donec at nisi lorem. Aliquam non dolor bibendum, venenatis ante ac, lobortis justo. Vestibulum nec pretium mi, eu consequat dolor.",
-    image:
-      "https://res.cloudinary.com/dsbkp5841/image/upload/v1687807062/Rectangle_7_ofhcmq.jpg",
-  },
-  {
-    id: 3,
-    name: "Sapatos Amarelo",
-    price: 490,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin massa metus, tempus nec ex ac, condimentum convallis diam. Donec at nisi lorem. Aliquam non dolor bibendum, venenatis ante ac, lobortis justo. Vestibulum nec pretium mi, eu consequat dolor.",
-    image:
-      "https://res.cloudinary.com/dsbkp5841/image/upload/v1687807062/Rectangle_6_p53ulc.jpg",
-  },
-  {
-    id: 4,
-    name: "Calça Preta",
-    price: 140,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin massa metus, tempus nec ex ac, condimentum convallis diam. Donec at nisi lorem. Aliquam non dolor bibendum, venenatis ante ac, lobortis justo. Vestibulum nec pretium mi, eu consequat dolor.",
-    image:
-      "https://res.cloudinary.com/dsbkp5841/image/upload/v1687807062/Rectangle_8_ijrp7v.jpg",
-  },
-];
+// const products: IProduct[] = [
+//   {
+//     id: 1,
+//     name: "Blazer Branco Elegante",
+//     price: 490,
+//     description:
+//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin massa metus, tempus nec ex ac, condimentum convallis diam. Donec at nisi lorem. Aliquam non dolor bibendum, venenatis ante ac, lobortis justo. Vestibulum nec pretium mi, eu consequat dolor.",
+//     image:
+//       "https://res.cloudinary.com/dsbkp5841/image/upload/v1687807062/Rectangle_4_hwrkgf.jpg",
+//   },
+//   {
+//     id: 2,
+//     name: "Blazer Laranja",
+//     price: 320,
+//     description:
+//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin massa metus, tempus nec ex ac, condimentum convallis diam. Donec at nisi lorem. Aliquam non dolor bibendum, venenatis ante ac, lobortis justo. Vestibulum nec pretium mi, eu consequat dolor.",
+//     image:
+//       "https://res.cloudinary.com/dsbkp5841/image/upload/v1687807062/Rectangle_7_ofhcmq.jpg",
+//   },
+//   {
+//     id: 3,
+//     name: "Sapatos Amarelo",
+//     price: 490,
+//     description:
+//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin massa metus, tempus nec ex ac, condimentum convallis diam. Donec at nisi lorem. Aliquam non dolor bibendum, venenatis ante ac, lobortis justo. Vestibulum nec pretium mi, eu consequat dolor.",
+//     image:
+//       "https://res.cloudinary.com/dsbkp5841/image/upload/v1687807062/Rectangle_6_p53ulc.jpg",
+//   },
+//   {
+//     id: 4,
+//     name: "Calça Preta",
+//     price: 140,
+//     description:
+//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin massa metus, tempus nec ex ac, condimentum convallis diam. Donec at nisi lorem. Aliquam non dolor bibendum, venenatis ante ac, lobortis justo. Vestibulum nec pretium mi, eu consequat dolor.",
+//     image:
+//       "https://res.cloudinary.com/dsbkp5841/image/upload/v1687807062/Rectangle_8_ijrp7v.jpg",
+//   },
+// ];

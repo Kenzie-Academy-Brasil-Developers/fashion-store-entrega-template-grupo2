@@ -1,8 +1,14 @@
+<<<<<<< Updated upstream
 interface ILoadingSpinnerProps {
   loading: boolean;
 }
 
 export const LoadingSpinner = ({ loading }: ILoadingSpinnerProps) => {
+=======
+import { IDisplayedProductProps } from "../interfaces";
+
+export const LoadingSpinner = ({ loading }: IDisplayedProductProps) => {
+>>>>>>> Stashed changes
   return (
     <span
       className={`${

@@ -1,9 +1,5 @@
-import { RefObject } from "react";
 import { BiPencil } from "react-icons/bi";
-
-interface IEditProductModal {
-  editModal: RefObject<HTMLDialogElement>;
-}
+import { IEditProductModal } from "../interfaces";
 
 export const EditProductModal = ({ editModal }: IEditProductModal) => {
   return (

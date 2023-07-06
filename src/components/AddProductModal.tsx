@@ -1,9 +1,5 @@
-import { RefObject } from "react";
 import { BsPlusCircle } from "react-icons/bs";
-
-interface IAddProductModal {
-  addModal: RefObject<HTMLDialogElement>;
-}
+import { IAddProductModal } from "../interfaces";
 
 export const AddProductModal = ({ addModal }: IAddProductModal) => {
   return (
