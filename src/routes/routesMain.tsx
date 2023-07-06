@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { ProductContext } from "../providers/ProductContext";
 
 export const RoutesMain = () => {
-  const { selectedProduct } = useContext(ProductContext);
+  const { products } = useContext(ProductContext);
   return (
     <Routes>
       <Route path="login" element={<Login />} />
@@ -17,10 +17,13 @@ export const RoutesMain = () => {
       <Route path="dashboard/home" element={<DashboardHome />} />
       <Route path="dashboard/products" element={<DashboardProducts />} />
       <Route path="/" element={<Home />} />
-      <Route
-        path={`product/${selectedProduct?.id}`}
-        element={<ProductPage />}
-      />
+      {products.map((product) => (
+        <Route
+          key={product.id}
+          path={`product/${product.id}`}
+          element={<ProductPage product={product} />}
+        />
+      ))}
     </Routes>
   );
 };

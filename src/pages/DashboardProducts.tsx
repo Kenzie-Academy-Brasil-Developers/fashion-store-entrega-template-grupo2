@@ -5,17 +5,32 @@ import { Footer } from "../components/Footer";
 import { DashboardProductCard } from "../components/DashboardProductCard";
 import { EditProductModal } from "../components/EditProductModal";
 import { AddProductModal } from "../components/AddProductModal";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export const DashboardProducts = () => {
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    window.scroll(0, 0);
+
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 300);
+    return () => clearTimeout(timeout);
+  }, []);
+
   const addModal = useRef<HTMLDialogElement>(null);
   const editModal = useRef<HTMLDialogElement>(null);
 
   return (
     <>
-      <main className="lg:w-full w-screen min-h-screen pb-10 md:pb-0">
-        <Logo />
-        <div className="flex flex-col gap-10 w-5/6 mx-auto">
+      <Logo />
+      <main className="w-5/6 mx-auto min-h-screen pb-10">
+        <div
+          className={`${
+            loading ? "translate-y-3" : ""
+          } flex flex-col gap-10 transition-all duration-1000`}
+        >
           <DashboardNavbar />
           <EditProductModal editModal={editModal} />
           <AddProductModal addModal={addModal} />

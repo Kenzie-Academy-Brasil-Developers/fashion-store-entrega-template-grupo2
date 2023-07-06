@@ -29,8 +29,6 @@ interface IProductContext {
   products: IProduct[];
   setProducts: Dispatch<SetStateAction<IProduct[]>>;
   selectId: (e: MouseEvent<HTMLElement>) => void;
-  selectedProduct: IProduct | undefined;
-  setSelectedProduct: Dispatch<SetStateAction<IProduct | undefined>>;
   selectedProductId: string | undefined;
   navigate: NavigateFunction;
   setSelectedProductId: Dispatch<SetStateAction<string | undefined>>;
@@ -61,6 +59,7 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
   const selectId = (e: MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
     const productId = target.closest("li")?.id;
+    console.log(productId);
     setSelectedProductId(productId);
   };
   const removeCartItem = (e: MouseEvent<HTMLElement>) => {
@@ -133,8 +132,6 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
           setProducts,
           selectId,
           selectedProductId,
-          selectedProduct,
-          setSelectedProduct,
           navigate,
           setSelectedProductId,
           addToCart,
