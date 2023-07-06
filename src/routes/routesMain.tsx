@@ -7,6 +7,7 @@ import { ProductPage } from "../pages/ProductPage";
 import { Register } from "../pages/Register";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { AdminProvider } from "../context/AdminContext/AdminContext";
 
 export const RoutesMain = () => {
   const { selectedProduct } = useContext(CartContext);
@@ -15,7 +16,11 @@ export const RoutesMain = () => {
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
       <Route path="dashboard/home" element={<DashboardHome />} />
-      <Route path="dashboard/products" element={<DashboardProducts />} />
+      <Route path="dashboard/products" element={
+        <AdminProvider>
+        <DashboardProducts/>
+      </AdminProvider>
+      } />
       <Route path="/" element={<Home />} />
       <Route
         path={`product/${selectedProduct?.id}`}
