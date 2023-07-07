@@ -6,12 +6,6 @@ import {
   ReactNode,
   MutableRefObject,
 } from "react";
-import { api } from "../services/Api";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { TAddProductForm } from "../components/AddProductForm/addProductFormSchema";
-import { TEditProductFormValues } from "../components/EditProductForm/editProductFormSchema";
-import { IProduct, IProductContext } from "../interfaces";
 
 interface IProductContextProps {
   children: ReactNode;

@@ -1,29 +1,28 @@
 import { Link } from "react-router-dom";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { BiArrowBack } from "react-icons/bi";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  registerFormSchema,
-  TRegisterFormValues,
-} from "./RegisterSchemaResolver";
+import { registerFormSchema, TRegisterFormValues} from "./RegisterSchemaResolver";
 import { FormTextInput } from "../../components/FormTextInput";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserProvider";
 
 export const FormRegister = () => {
   const {
     register,
-    handleSubmit,
     formState: { errors },
+    handleSubmit
   } = useForm<TRegisterFormValues>({
     resolver: zodResolver(registerFormSchema),
   });
-  const onSubmit: SubmitHandler<TRegisterFormValues> = (data) =>
-    console.log(data);
+
+  const {RegisterAdm} = useContext(UserContext)
 
   return (
     <>
       <form
         className="w-full lg:max-w-sm flex flex-col gap-5 mr-auto"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(RegisterAdm)}
       >
         <div className="flex flex-col gap-3">
           <Link
