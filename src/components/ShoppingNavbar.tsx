@@ -2,7 +2,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../providers/ProductContext";
-import { IProductCart } from "../interfaces";
+import { IProduct } from "../providers/ProductContext";
 import { BiUserCircle } from "react-icons/bi";
 
 export const ShoppingNavbar = () => {
@@ -10,9 +10,9 @@ export const ShoppingNavbar = () => {
   const [cartCount, setCartCount] = useState<Number>(0);
 
   useEffect(() => {
-    const itemTotal = (cartProducts as IProductCart[]).reduce(
-      (accumulator: number, product: IProductCart) => {
-        return accumulator + product.quantity;
+    const itemTotal = (cartProducts as IProduct[]).reduce(
+      (accumulator: number, product: IProduct) => {
+        return accumulator + product.quantity!;
       },
       0
     );

@@ -1,4 +1,6 @@
-import { ILoadingSpinnerProps } from "../interfaces/index";
+interface ILoadingSpinnerProps {
+  loading: boolean;
+}
 
 export const LoadingSpinner = ({ loading }: ILoadingSpinnerProps) => {
   return (

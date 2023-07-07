@@ -15,7 +15,7 @@ export const ProductList = ({ productArray }: IProductListProps) => {
           productTitle={product.name}
           imgSource={product.image}
           productId={product.id}
-          loading
+          loading={false}
         />
       ))}
     </ul>
