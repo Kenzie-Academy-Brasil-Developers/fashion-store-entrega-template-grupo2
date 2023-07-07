@@ -22,7 +22,7 @@ export const DeleteProductModal = ({ deleteModal }: IDeleteProductModal) => {
           <h3 className="font-oswald uppercase font-semibold tracking-wide text-2xl absolute left-6 top-7">
             DELETAR PRODUTO
           </h3>
-          <p className="pb-10">
+          <p className="pb-10 font-oswald">
             Tem certeza que deseja deletar o produto selecionado?
           </p>
           <div className="flex justify-end gap-3">
@@ -31,7 +31,7 @@ export const DeleteProductModal = ({ deleteModal }: IDeleteProductModal) => {
                 setSelectedProduct(undefined);
                 deleteModal.current?.close();
               }}
-              className="btn btn-outline"
+              className="btn btn-outline rounded-none font-oswald font-light"
             >
               CANCELAR
             </button>
@@ -41,7 +41,7 @@ export const DeleteProductModal = ({ deleteModal }: IDeleteProductModal) => {
                 setSelectedProduct(undefined);
                 deleteModal.current?.close();
               }}
-              className="btn btn-primary"
+              className="btn btn-primary rounded-none font-oswald font-light"
             >
               DELETAR
             </button>

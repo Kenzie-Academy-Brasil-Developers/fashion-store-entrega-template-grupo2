@@ -52,6 +52,11 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
     loadProducts();
   }, []);
 
+  const toggleCartModal = () => {
+    if (cartModal.current !== null)
+      cartModal.current.checked = !cartModal.current.checked;
+  };
+
   //logica manipulacao de items- alvaro
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsdmFyb0BtYWlsLmNvbSIsImlhdCI6MTY4ODY2NjQwNCwiZXhwIjoxNjg4NjcwMDA0LCJzdWIiOiIyIn0.7cG5pCWJrKj2dnyieUtdEw4iLGy4k_UZQdUyk0veMD0";
@@ -134,6 +139,7 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
           deleteProduct,
           selectedProduct,
           setSelectedProduct,
+          toggleCartModal,
         }}
       >
         {children}
