@@ -14,12 +14,12 @@ export const HighlightProductCard = ({
     <li className="flex flex-col flex-shrink-0 gap-3 sm:gap-5">
       <Link
         to={`/product/${productId}`}
-        className="rounded-3xl shrink-0 w-44 lg:w-60 h-48 sm:h-52 md:h-64 lg:h-72 cursor-pointer overflow-hidden relative"
+        className="rounded-3xl shrink-0  cursor-pointer overflow-hidden relative"
       >
         <LoadingSpinner loading={loading} />
         <img
           src={imgSource}
-          className="w-full h-full hover:scale-[105%] transition-all duration-1000"
+          className="object-cover w-44 lg:w-60 h-48 sm:h-52 md:h-64 lg:h-72 hover:scale-[105%] transition-all duration-1000"
         />
       </Link>
       <Link
@@ -29,7 +29,7 @@ export const HighlightProductCard = ({
         {productTitle}
       </Link>
       <p className="uppercase font-oswald font-normal">
-        {productPrice.toLocaleString("pt-BR", {
+        {Number(productPrice).toLocaleString("pt-BR", {
           style: "currency",
           currency: "BRL",
         })}

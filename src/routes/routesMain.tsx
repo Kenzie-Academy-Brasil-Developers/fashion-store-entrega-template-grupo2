@@ -8,14 +8,14 @@ import { Register } from "../pages/Register";
 import { useContext } from "react";
 import { ProductContext } from "../providers/ProductContext";
 
-import { PublicRouts } from "../components/PublicRoutes/PublicRoutes";
-import { ProtectedRoutes } from "../components/ProtecedRoutes/ProtcedRoutes";
+import { PublicRoutes } from "./publicRoutes/PublicRoutes";
+import { ProtectedRoutes } from "./protectedRoutes/ProtcedRoutes";
 
 export const RoutesMain = () => {
   const { products } = useContext(ProductContext);
   return (
     <Routes>
-      <Route element={<PublicRouts/>}> 
+      <Route element={<PublicRoutes />}>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="/" element={<Home />} />
@@ -27,12 +27,10 @@ export const RoutesMain = () => {
           />
         ))}
       </Route>
-      <Route element={<ProtectedRoutes/>}>
+      <Route element={<ProtectedRoutes />}>
         <Route path="dashboard/home" element={<DashboardHome />} />
-        <Route path="dashboard/products" element={
-          <DashboardProducts/>
-        } />
+        <Route path="dashboard/products" element={<DashboardProducts />} />
       </Route>
-
+    </Routes>
   );
 };

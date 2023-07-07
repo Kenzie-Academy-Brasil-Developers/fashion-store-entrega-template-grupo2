@@ -12,7 +12,8 @@ import { useEffect } from "react";
 import { FormTextareaInput } from "../FormTextareaInput";
 
 export const EditProductForm = () => {
-  const { selectedProduct, editProduct } = useContext(ProductContext);
+  const { selectedProduct, editProduct, editModal } =
+    useContext(ProductContext);
 
   const {
     register,
@@ -36,7 +37,7 @@ export const EditProductForm = () => {
 
   const submit: SubmitHandler<TEditProductFormValues> = (formData) => {
     if (selectedProduct) editProduct(formData, selectedProduct.id);
-    reset();
+    editModal.current?.close();
   };
 
   return (
