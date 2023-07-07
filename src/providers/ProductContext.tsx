@@ -17,7 +17,7 @@ interface IProductContextProps {
   children: ReactNode;
 }
 
-//logica loja/carrinho- marcelino
+//estados loja/carrinho - marcelino
 export const ProductContext = createContext({} as IProductContext);
 export const ProductProvider = ({ children }: IProductContextProps) => {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -26,9 +26,7 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
     IProduct | undefined
   >();
 
-  //usecallback
-  const cartModal = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
+  //cart logic
   const removeCartItem = (productId: string) => {
     const dupe = cartProducts.find(
       (product) => product.id.toString() === productId
@@ -37,9 +35,11 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
       const updatedArray = cartProducts.filter(
         (product) => product.id.toString() !== productId
       );
+      saveCartProducts(updatedArray);
       setCartProducts(updatedArray);
     }
   };
+
   useEffect(() => {
     const loadProducts = async () => {
       try {
@@ -52,17 +52,23 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
     loadProducts();
   }, []);
 
-  const toggleCartModal = () => {
-    if (cartModal.current !== null)
-      cartModal.current.checked = !cartModal.current.checked;
+  const addToCart = (product: IProduct) => {
+    const dupe = cartProducts.find((item) => item.id === product.id);
+    if (dupe) {
+      const updatedDupe = { ...dupe, quantity: (dupe.quantity || 0) + 1 };
+      const updatedArray = cartProducts.map((item) =>
+        item.id === product.id ? updatedDupe : item
+      );
+      setCartProducts(updatedArray);
+      saveCartProducts(updatedArray);
+    } else {
+      setCartProducts([...cartProducts, { ...product, quantity: 1 }]);
+      saveCartProducts([...cartProducts, { ...product, quantity: 1 }]);
+    }
   };
 
-  //logica manipulacao de items- alvaro
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsdmFyb0BtYWlsLmNvbSIsImlhdCI6MTY4ODY2NjQwNCwiZXhwIjoxNjg4NjcwMDA0LCJzdWIiOiIyIn0.7cG5pCWJrKj2dnyieUtdEw4iLGy4k_UZQdUyk0veMD0";
-
   // Função para salvar os produtos do carrinho no localStorage
-  const saveCartProductsToLocalStorage = (cartProducts: IProduct[]) => {
+  const saveCartProducts = (cartProducts: IProduct[]) => {
     localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
   };
 
@@ -75,6 +81,17 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
     }
   }, []);
 
+  //usecallback, utility functions
+  const cartModal = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+  const toggleCartModal = () => {
+    if (cartModal.current !== null)
+      cartModal.current.checked = !cartModal.current.checked;
+  };
+
+  //logica manipulacao de items- alvaro
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsdmFyb0BtYWlsLmNvbSIsImlhdCI6MTY4ODY2NjQwNCwiZXhwIjoxNjg4NjcwMDA0LCJzdWIiOiIyIn0.7cG5pCWJrKj2dnyieUtdEw4iLGy4k_UZQdUyk0veMD0";
 
   const addProduct = async (formData: TAddProductForm) => {
     try {
@@ -155,6 +172,7 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
           selectedProduct,
           setSelectedProduct,
           toggleCartModal,
+          addToCart,
         }}
       >
         {children}

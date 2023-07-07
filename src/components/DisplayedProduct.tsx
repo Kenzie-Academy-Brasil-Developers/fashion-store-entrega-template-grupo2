@@ -7,20 +7,7 @@ export const DisplayedProduct = ({
   loading,
   product,
 }: IDisplayedProductProps) => {
-  const { cartProducts, setCartProducts } = useContext(ProductContext);
-
-  const addToCart = () => {
-    const dupe = cartProducts.find((item) => item.id === product.id);
-    if (dupe) {
-      const updatedDupe = { ...dupe, quantity: (dupe.quantity || 0) + 1 };
-      const updatedArray = cartProducts.map((item) =>
-        item.id === product.id ? updatedDupe : item
-      );
-      setCartProducts(updatedArray);
-    } else {
-      setCartProducts([...cartProducts, { ...product, quantity: 1 }]);
-    }
-  };
+  const { addToCart } = useContext(ProductContext);
 
   return (
     <>
@@ -53,7 +40,7 @@ export const DisplayedProduct = ({
           </p>
           <button
             disabled={loading}
-            onClick={addToCart}
+            onClick={() => addToCart(product)}
             className="btn btn-primary flex-nowrap uppercase gap-3 mt-3 w-fit font-thin tracking-widest font-oswald items-center flex"
           >
             <BsCartPlus className="text-xl flex-shrink-0" />
