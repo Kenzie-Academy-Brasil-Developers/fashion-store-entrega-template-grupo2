@@ -1,13 +1,7 @@
 import { useContext } from "react";
 import { ProductContext } from "../providers/ProductContext";
-
-interface ICartProductCardProps {
-  productTitle: string;
-  productPrice: number;
-  imgSource: string;
-  productQuantity: number;
-  productId: number;
-}
+import { ICartProductCardProps } from "../interfaces";
+import { Link } from "react-router-dom";
 
 export const CartProductCard = ({
   productTitle,
@@ -16,38 +10,28 @@ export const CartProductCard = ({
   productId,
   imgSource,
 }: ICartProductCardProps) => {
-  const { selectId, toggleCartModal, removeCartItem } =
-    useContext(ProductContext);
+  const { removeCartItem } = useContext(ProductContext);
 
   return (
     <li
       id={productId.toString()}
       className="w-full flex flex-row gap-5 flex-nowrap relative"
     >
-      <div className="indicator">
+      <Link to={`/product/${productId}`} className="indicator">
         <span className="indicator-item badge text-xs badge-secondary font-roboto rounded-full select-none">
           {productQuantity}
         </span>
-        <div
-          onClick={(e) => {
-            toggleCartModal();
-            selectId(e);
-          }}
-          className="rounded-md overflow-hidden w-16 h-16 cursor-pointer"
-        >
+        <div className="rounded-md overflow-hidden w-16 h-16 cursor-pointer">
           <img src={imgSource} />
         </div>
-      </div>
+      </Link>
       <div className="flex flex-col gap-6 items-start justify-center">
-        <h1
-          onClick={(e) => {
-            toggleCartModal();
-            selectId(e);
-          }}
+        <Link
+          to={`/product/${productId}`}
           className="font-oswald link-hover cursor-pointer"
         >
           {productTitle}
-        </h1>
+        </Link>
         <p className="font-oswald">
           {productPrice.toLocaleString("pt-BR", {
             style: "currency",
@@ -56,7 +40,7 @@ export const CartProductCard = ({
         </p>
       </div>
       <button
-        onClick={removeCartItem}
+        onClick={() => removeCartItem(productId.toString())}
         className="font-oswald font-thin text-xl absolute right-4 top-2"
       >
         —

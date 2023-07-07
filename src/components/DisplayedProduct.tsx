@@ -1,11 +1,7 @@
 import { useContext } from "react";
-import { IProduct, ProductContext } from "../providers/ProductContext";
 import { BsCartPlus } from "react-icons/bs";
-
-interface IDisplayedProductProps {
-  loading: boolean;
-  product: IProduct;
-}
+import { ProductContext } from "../providers/ProductContext";
+import { IDisplayedProductProps } from "../interfaces";
 
 export const DisplayedProduct = ({
   loading,
@@ -44,7 +40,7 @@ export const DisplayedProduct = ({
           </p>
           <button
             disabled={loading}
-            onClick={addToCart}
+            onClick={() => addToCart(product)}
             className="btn btn-primary flex-nowrap uppercase gap-3 mt-3 w-fit font-thin tracking-widest font-oswald items-center flex"
           >
             <BsCartPlus className="text-xl flex-shrink-0" />

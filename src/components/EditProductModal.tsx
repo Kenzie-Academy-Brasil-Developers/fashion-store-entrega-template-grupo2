@@ -1,9 +1,5 @@
-import { RefObject } from "react";
-import { EditProcutForm } from "./EditProductForm";
-
-interface IEditProductModal {
-  editModal: RefObject<HTMLDialogElement>;
-}
+import { EditProductForm } from "./EditProductForm";
+import { IEditProductModal } from "../interfaces";
 
 export const EditProductModal = ({ editModal }: IEditProductModal) => {
   return (
@@ -24,7 +20,7 @@ export const EditProductModal = ({ editModal }: IEditProductModal) => {
           <h3 className="font-oswald font-semibold tracking-wide text-2xl absolute left-6 top-7">
             EDITAR PRODUTO
           </h3>
-          <EditProcutForm/>
+          <EditProductForm />
         </div>
       </dialog>
     </>

@@ -56,14 +56,14 @@ export const FormRegister = () => {
         <FormTextInput
           inputName="password"
           inputPlaceholder="Senha"
-          inputType="text"
+          inputType="password"
           register={register}
           errors={errors}
         />
         <FormTextInput
           inputName="confirm"
           inputPlaceholder="Confirmar senha"
-          inputType="text"
+          inputType="password"
           register={register}
           errors={errors}
         />

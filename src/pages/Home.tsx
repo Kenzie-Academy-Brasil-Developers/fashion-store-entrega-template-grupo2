@@ -5,17 +5,13 @@ import { HighlightSection } from "../components/HighlightSection";
 import { Hero } from "../components/Hero";
 
 export const Home = () => {
-  const { products, setSelectedProductId } = useContext(ProductContext);
+  const { products } = useContext(ProductContext);
   const [loading, setLoading] = useState<boolean>(true);
 
-
   useEffect(() => {
-    setSelectedProductId(undefined);
-
     const timeout = setTimeout(() => {
       setLoading(false);
     }, 300);
-
 
     return () => clearTimeout(timeout);
   }, []);
@@ -31,7 +27,6 @@ export const Home = () => {
             highlightSectionRef={highlightSectionRef}
             productArray={products}
           />
-
         </main>
       </Cart>
     </>

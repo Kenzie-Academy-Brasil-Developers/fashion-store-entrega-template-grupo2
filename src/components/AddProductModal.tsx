@@ -1,9 +1,5 @@
-import { RefObject } from "react";
 import { AddProductForm } from "./AddProductForm";
-
-interface IAddProductModal {
-  addModal: RefObject<HTMLDialogElement>;
-}
+import { IAddProductModal } from "../interfaces";
 
 export const AddProductModal = ({ addModal }: IAddProductModal) => {
   return (
@@ -22,7 +18,7 @@ export const AddProductModal = ({ addModal }: IAddProductModal) => {
           <h3 className="font-oswald font-semibold tracking-wide text-2xl absolute left-6 top-7">
             NOVO PRODUTO
           </h3>
-          <AddProductForm/>
+          <AddProductForm />
         </div>
       </dialog>
     </>

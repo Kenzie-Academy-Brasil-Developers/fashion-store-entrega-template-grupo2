@@ -37,7 +37,7 @@ export const FormLogin = () => {
           register={register}
           errors={errors}
           inputName="password"
-          inputType="string"
+          inputType="password"
           inputPlaceholder="senha"
         />
         <div className="flex gap-5 mr-auto">

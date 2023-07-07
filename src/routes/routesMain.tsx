@@ -7,6 +7,7 @@ import { ProductPage } from "../pages/ProductPage";
 import { Register } from "../pages/Register";
 import { useContext } from "react";
 import { ProductContext } from "../providers/ProductContext";
+
 import { PublicRouts } from "../components/PublicRoutes/PublicRoutes";
 import { ProtectedRoutes } from "../components/ProtecedRoutes/ProtcedRoutes";
 
@@ -33,6 +34,5 @@ export const RoutesMain = () => {
         } />
       </Route>
 
-    </Routes>  
   );
 };

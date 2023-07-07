@@ -1,20 +1,20 @@
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../providers/ProductContext";
-import { IProduct } from "../providers/ProductContext";
+import { IProduct } from "../interfaces";
 import { Cart } from "../components/Cart";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { DisplayedProduct } from "../components/DisplayedProduct";
 import { HighlightSection } from "../components/HighlightSection";
 
 export const ProductPage = ({ product }: { product: IProduct }) => {
-  const { selectedProductId, products } = useContext(ProductContext);
-
+  const { products, cartModal } = useContext(ProductContext);
 
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     window.scroll(0, 0);
+    cartModal.current.checked = false;
     setLoading(true);
 
     const filteredArray = products.filter((item) => item.id !== product.id);
@@ -25,7 +25,7 @@ export const ProductPage = ({ product }: { product: IProduct }) => {
       setLoading(false);
     }, 300);
     return () => clearTimeout(timeout);
-  }, [selectedProductId]);
+  }, [product]);
 
   return (
     <>

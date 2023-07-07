@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IProduct } from "../providers/ProductContext";
+import { IProduct } from "../interfaces";
 
 export const Breadcrumbs = ({ product }: { product: IProduct }) => {
 
