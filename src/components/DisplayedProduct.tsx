@@ -7,7 +7,20 @@ export const DisplayedProduct = ({
   loading,
   product,
 }: IDisplayedProductProps) => {
-  const { addToCart } = useContext(ProductContext);
+  const { cartProducts, setCartProducts } = useContext(ProductContext);
+
+  const addToCart = () => {
+    const dupe = cartProducts.find((item) => item.id === product.id);
+    if (dupe) {
+      const updatedDupe = { ...dupe, quantity: (dupe.quantity || 0) + 1 };
+      const updatedArray = cartProducts.map((item) =>
+        item.id === product.id ? updatedDupe : item
+      );
+      setCartProducts(updatedArray);
+    } else {
+      setCartProducts([...cartProducts, { ...product, quantity: 1 }]);
+    }
+  };
 
   return (
     <>

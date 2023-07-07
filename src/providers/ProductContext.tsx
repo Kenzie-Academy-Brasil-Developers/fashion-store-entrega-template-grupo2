@@ -4,30 +4,62 @@ import {
   useEffect,
   createContext,
   ReactNode,
-  MouseEvent,
   MutableRefObject,
 } from "react";
 import { api } from "../services/Api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { TAddProductForm } from "../components/AddProductForm/addProductFormSchema";
-import { TEditProductForm } from "../components/EditProductForm/editProductFormSchema";
+import { TEditProductFormValues } from "../components/EditProductForm/editProductFormSchema";
 import { IProduct, IProductContext } from "../interfaces";
 
 interface IProductContextProps {
   children: ReactNode;
 }
 
+//logica loja/carrinho- marcelino
 export const ProductContext = createContext({} as IProductContext);
-
 export const ProductProvider = ({ children }: IProductContextProps) => {
-  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const [products, setProducts] = useState<IProduct[]>([]);
   const [cartProducts, setCartProducts] = useState<IProduct[] | []>([]);
+  const [selectedProduct, setSelectedProduct] = useState<
+    IProduct | undefined
+  >();
+
+  //usecallback
+  const cartModal = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+  const removeCartItem = (productId: string) => {
+    const dupe = cartProducts.find(
+      (product) => product.id.toString() === productId
+    );
+    if (dupe) {
+      const updatedArray = cartProducts.filter(
+        (product) => product.id.toString() !== productId
+      );
+      setCartProducts(updatedArray);
+    }
+  };
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const { data } = await api.get("/products");
+        setProducts(data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    loadProducts();
+  }, []);
+
+  const toggleCartModal = () => {
+    if (cartModal.current !== null)
+      cartModal.current.checked = !cartModal.current.checked;
+  };
+
+  //logica manipulacao de items- alvaro
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsdmFyb0BtYWlsLmNvbSIsImlhdCI6MTY4ODY2NjQwNCwiZXhwIjoxNjg4NjcwMDA0LCJzdWIiOiIyIn0.7cG5pCWJrKj2dnyieUtdEw4iLGy4k_UZQdUyk0veMD0";
-
-  const [editingProduct, setEditingProduct] = useState<IProduct | null>(null);
 
   // Função para salvar os produtos do carrinho no localStorage
   const saveCartProductsToLocalStorage = (cartProducts: IProduct[]) => {
@@ -42,6 +74,7 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
       console.log(savedCartProducts);
     }
   }, []);
+
 
   const addProduct = async (formData: TAddProductForm) => {
     try {
@@ -73,7 +106,10 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
     }
   };
 
-  const editProduct = async (formData: TEditProductForm, productId: number) => {
+  const editProduct = async (
+    formData: TEditProductFormValues,
+    productId: number
+  ) => {
     try {
       await api.put(`/products/${productId}`, formData, {
         headers: {
@@ -102,110 +138,23 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
     }
   };
 
-  const [selectedProductId, setSelectedProductId] = useState<
-    string | undefined
-  >("");
-  const [selectedProduct, setSelectedProduct] = useState<
-    IProduct | undefined
-  >();
-
-  //usecallback
-  const cartModal = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
-  const selectId = (e: MouseEvent<HTMLElement>) => {
-    const target = e.target as HTMLElement;
-    const productId = target.closest("li")?.id;
-    setSelectedProductId(productId);
-  };
-  const removeCartItem = (e: MouseEvent<HTMLElement>) => {
-    const target = e.target as HTMLElement;
-    const productId = target.closest("li")?.id;
-    const dupe = cartProducts.find(
-      (product) => product.id.toString() === productId
-    );
-    if (dupe) {
-      const updatedArray = cartProducts.filter(
-        (product) => product.id.toString() !== productId
-      );
-      setCartProducts(updatedArray);
-      saveCartProductsToLocalStorage(updatedArray);
-    }
-  };
-  const addToCart = () => {
-    if (selectedProduct === undefined) return;
-    const dupe = cartProducts.find(
-      (product) => product.id === selectedProduct.id
-    );
-    if (dupe) {
-      const updatedDupe = { ...dupe, quantity: (dupe.quantity || 0) + 1 };
-      const updatedArray = cartProducts.map((product) =>
-        product.id === selectedProduct.id ? updatedDupe : product
-      );
-      setCartProducts(updatedArray);
-      saveCartProductsToLocalStorage(updatedArray);
-      console.log("oi");
-    } else {
-      setCartProducts([...cartProducts, { ...selectedProduct, quantity: 1 }]);
-      saveCartProductsToLocalStorage([
-        ...cartProducts,
-        { ...selectedProduct, quantity: 1 },
-      ]);
-    }
-  };
-  const toggleCartModal = () => {
-    if (cartModal.current === null) return;
-    cartModal.current.checked = !cartModal.current.checked;
-  };
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const { data } = await api.get("/products");
-        setProducts(data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    loadProducts();
-  }, []);
-
-  useEffect(() => {
-    if (isFirstRender) {
-      setIsFirstRender(false);
-      return;
-    }
-
-    const filteredProduct = products.filter(
-      (product) => product.id.toString() === selectedProductId
-    );
-    setSelectedProduct(filteredProduct[0]);
-  }, [selectedProductId]);
-
-  useEffect(() => {
-    if (selectedProduct === undefined) return;
-    navigate(`/product/${selectedProduct?.id}`);
-  }, [selectedProduct]);
-
   return (
     <>
       <ProductContext.Provider
         value={{
           products,
           setProducts,
-          selectId,
-          selectedProductId,
           navigate,
-          setSelectedProductId,
-          addToCart,
+          setCartProducts,
           cartProducts,
           cartModal: cartModal as MutableRefObject<HTMLInputElement>,
-          toggleCartModal,
           removeCartItem,
           addProduct,
           editProduct,
           deleteProduct,
-          editingProduct,
-          setEditingProduct,
+          selectedProduct,
+          setSelectedProduct,
+          toggleCartModal,
         }}
       >
         {children}
