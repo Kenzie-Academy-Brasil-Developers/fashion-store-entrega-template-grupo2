@@ -1,11 +1,7 @@
 import { useContext } from "react";
-import { IProduct, ProductContext } from "../providers/ProductContext";
 import { BsCartPlus } from "react-icons/bs";
-
-interface IDisplayedProductProps {
-  loading: boolean;
-  product: IProduct;
-}
+import { ProductContext } from "../providers/ProductContext";
+import { IDisplayedProductProps } from "../interfaces";
 
 export const DisplayedProduct = ({
   loading,

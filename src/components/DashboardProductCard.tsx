@@ -1,16 +1,8 @@
 import { MdOutlineEdit } from "react-icons/md";
 import { TfiTrash } from "react-icons/tfi";
-import { RefObject, useContext } from "react";
+import { useContext } from "react";
 import { ProductContext } from "../providers/ProductContext";
-
-interface IDashboardProductCard {
-  productName: string;
-  productPrice: number;
-  productDescription: string;
-  imgSource: string;
-  productId: number;
-  editModal: RefObject<HTMLDialogElement>;
-}
+import { IDashboardProductCard } from "../interfaces";
 
 export const DashboardProductCard = ({
   productName,

@@ -4,47 +4,18 @@ import {
   useEffect,
   createContext,
   ReactNode,
-  Dispatch,
-  SetStateAction,
   MouseEvent,
   MutableRefObject,
 } from "react";
 import { api } from "../services/Api";
-import { useNavigate, NavigateFunction } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { TAddProductForm } from "../components/AddProductForm/addProductFormSchema";
 import { TEditProductForm } from "../components/EditProductForm/editProductFormSchema";
+import { IProduct, IProductContext } from "../interfaces";
 
 interface IProductContextProps {
   children: ReactNode;
-}
-
-export interface IProduct {
-  id: number;
-  name: string;
-  price: number;
-  description: string;
-  image: string;
-  quantity?: number;
-}
-
-interface IProductContext {
-  products: IProduct[];
-  setProducts: Dispatch<SetStateAction<IProduct[]>>;
-  selectId: (e: MouseEvent<HTMLElement>) => void;
-  selectedProductId: string | undefined;
-  navigate: NavigateFunction;
-  setSelectedProductId: Dispatch<SetStateAction<string | undefined>>;
-  addToCart: () => void;
-  cartProducts: [] | IProduct[];
-  cartModal: MutableRefObject<HTMLInputElement>;
-  toggleCartModal: () => void;
-  removeCartItem: (e: MouseEvent<HTMLElement>) => void;
-  addProduct: (formData: TAddProductForm) => Promise<void>;
-  deleteProduct: (productId: number) => Promise<void>;
-  editProduct: (formData: TEditProductForm, productId: number) => Promise<void>;
-  editingProduct: IProduct | null;
-  setEditingProduct: Dispatch<SetStateAction<IProduct | null>>;
 }
 
 export const ProductContext = createContext({} as IProductContext);

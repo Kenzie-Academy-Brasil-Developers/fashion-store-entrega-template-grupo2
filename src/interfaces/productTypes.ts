@@ -7,6 +7,8 @@ import {
   RefObject,
 } from "react";
 import { NavigateFunction } from "react-router-dom";
+import { TAddProductForm } from "../components/AddProductForm/addProductFormSchema";
+import { TEditProductForm } from "../components/EditProductForm/editProductFormSchema";
 
 export interface IProductContextProps {
   children: ReactNode;
@@ -18,6 +20,7 @@ export interface IProduct {
   price: number;
   description: string;
   image: string;
+  quantity?: number;
 }
 
 export interface IProductCart extends IProduct {
@@ -28,8 +31,6 @@ export interface IProductContext {
   products: IProduct[];
   setProducts: Dispatch<SetStateAction<IProduct[]>>;
   selectId: (e: MouseEvent<HTMLElement>) => void;
-  selectedProduct: IProduct | undefined;
-  setSelectedProduct: Dispatch<SetStateAction<IProduct | undefined>>;
   selectedProductId: string | undefined;
   navigate: NavigateFunction;
   setSelectedProductId: Dispatch<SetStateAction<string | undefined>>;
@@ -38,11 +39,15 @@ export interface IProductContext {
   cartModal: MutableRefObject<HTMLInputElement>;
   toggleCartModal: () => void;
   removeCartItem: (e: MouseEvent<HTMLElement>) => void;
+  addProduct: (formData: TAddProductForm) => Promise<void>;
+  deleteProduct: (productId: number) => Promise<void>;
+  editProduct: (formData: TEditProductForm, productId: number) => Promise<void>;
+  editingProduct: IProduct | null;
+  setEditingProduct: Dispatch<SetStateAction<IProduct | null>>;
 }
 
 export interface IProductListProps {
   productArray: IProduct[];
-  loading: boolean;
 }
 
 export interface IAddProductModal {
@@ -66,6 +71,24 @@ export interface IHighlightProductCardProps {
   loading: boolean;
 }
 
-export interface ILoadingSpinnerProps {
-  loading: boolean;
+export interface IHighlightSectionProps {
+  productArray: IProduct[];
+  highlightSectionRef: RefObject<HTMLElement> | undefined;
+}
+
+export interface ICartProductCardProps {
+  productTitle: string;
+  productPrice: number;
+  imgSource: string;
+  productQuantity: number;
+  productId: number;
+}
+
+export interface IDashboardProductCard {
+  productName: string;
+  productPrice: number;
+  productDescription: string;
+  imgSource: string;
+  productId: number;
+  editModal: RefObject<HTMLDialogElement>;
 }

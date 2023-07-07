@@ -1,9 +1,5 @@
-import { IProduct } from "../providers/ProductContext";
 import { HighlightProductCard } from "./HighlightProductCard";
-
-interface IProductListProps {
-  productArray: IProduct[];
-}
+import { IProductListProps } from "../interfaces";
 
 export const ProductList = ({ productArray }: IProductListProps) => {
   return (
