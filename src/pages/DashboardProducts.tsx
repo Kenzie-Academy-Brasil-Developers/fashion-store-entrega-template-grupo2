@@ -5,7 +5,7 @@ import { Footer } from "../components/Footer";
 import { DashboardProductCard } from "../components/DashboardProductCard";
 import { EditProductModal } from "../components/EditProductModal";
 import { AddProductModal } from "../components/AddProductModal";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../providers/ProductContext";
 import { DeleteProductModal } from "../components/DeleteProductModal";
 
@@ -21,11 +21,7 @@ export const DashboardProducts = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  const addModal = useRef<HTMLDialogElement>(null);
-  const editModal = useRef<HTMLDialogElement>(null);
-  const deleteModal = useRef<HTMLDialogElement>(null);
-
-  const { products } = useContext(ProductContext);
+  const { products, addModal } = useContext(ProductContext);
 
   return (
     <>
@@ -37,10 +33,10 @@ export const DashboardProducts = () => {
           } flex flex-col gap-10 transition-all duration-1000`}
         >
           <DashboardNavbar />
-          <EditProductModal editModal={editModal} />
-          <AddProductModal addModal={addModal} />
-          <DeleteProductModal deleteModal={deleteModal} />
-          <div className="flex gap-10 md:items-center">
+          <EditProductModal />
+          <AddProductModal />
+          <DeleteProductModal />
+          <div className="flex gap-10 md:items-center overflow-hidden">
             <div className=" flex flex-col gap-8">
               <h1 className="font-oswald text-4xl md:text-6xl font-medium">
                 PRODUTOS
@@ -59,7 +55,7 @@ export const DashboardProducts = () => {
               </span>
             </button>
           </div>
-          <ul className="grid grid-cols-1 md:grid-cols-2 mx-auto gap-10 w-full list-none">
+          <ul className="grid grid-cols-1 md:grid-cols-2 mx-auto gap-10 w-full list-none overflow-hidden">
             {products.map((product) => (
               <DashboardProductCard
                 key={product.id}
@@ -67,9 +63,7 @@ export const DashboardProducts = () => {
                 productPrice={Number(product.price)}
                 productDescription={product.description}
                 imgSource={product.image}
-                editModal={editModal}
                 productId={product.id}
-                deleteModal={deleteModal}
               />
             ))}
           </ul>

@@ -6,14 +6,25 @@ import {
   ReactNode,
   MutableRefObject,
 } from "react";
+import { api } from "../services/Api";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { TAddProductForm } from "../components/AddProductForm/addProductFormSchema";
+import { TEditProductFormValues } from "../components/EditProductForm/editProductFormSchema";
+import { IProduct, IProductContext } from "../interfaces";
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
 
 interface IProductContextProps {
   children: ReactNode;
 }
 
-//estados loja/carrinho - marcelino
 export const ProductContext = createContext({} as IProductContext);
+
 export const ProductProvider = ({ children }: IProductContextProps) => {
+  const { token } = useContext(UserContext);
+
+  //estados loja/carrinho - marcelino
   const [products, setProducts] = useState<IProduct[]>([]);
   const [cartProducts, setCartProducts] = useState<IProduct[] | []>([]);
   const [selectedProduct, setSelectedProduct] = useState<
@@ -21,6 +32,21 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
   >();
 
   //cart logic
+  const addCartItem = (product: IProduct) => {
+    const dupe = cartProducts.find((item) => item.id === product.id);
+    if (dupe) {
+      const updatedDupe = { ...dupe, quantity: (dupe.quantity || 0) + 1 };
+      const updatedArray = cartProducts.map((item) =>
+        item.id === product.id ? updatedDupe : item
+      );
+      setCartProducts(updatedArray);
+      saveCartProducts(updatedArray);
+    } else {
+      setCartProducts([...cartProducts, { ...product, quantity: 1 }]);
+      saveCartProducts([...cartProducts, { ...product, quantity: 1 }]);
+    }
+  };
+
   const removeCartItem = (productId: string) => {
     const dupe = cartProducts.find(
       (product) => product.id.toString() === productId
@@ -39,27 +65,10 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
       try {
         const { data } = await api.get("/products");
         setProducts(data);
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     };
     loadProducts();
   }, []);
-
-  const addToCart = (product: IProduct) => {
-    const dupe = cartProducts.find((item) => item.id === product.id);
-    if (dupe) {
-      const updatedDupe = { ...dupe, quantity: (dupe.quantity || 0) + 1 };
-      const updatedArray = cartProducts.map((item) =>
-        item.id === product.id ? updatedDupe : item
-      );
-      setCartProducts(updatedArray);
-      saveCartProducts(updatedArray);
-    } else {
-      setCartProducts([...cartProducts, { ...product, quantity: 1 }]);
-      saveCartProducts([...cartProducts, { ...product, quantity: 1 }]);
-    }
-  };
 
   // Função para salvar os produtos do carrinho no localStorage
   const saveCartProducts = (cartProducts: IProduct[]) => {
@@ -71,7 +80,6 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
     const savedCartProducts = localStorage.getItem("cartProducts");
     if (savedCartProducts) {
       setCartProducts(JSON.parse(savedCartProducts));
-      console.log(savedCartProducts);
     }
   }, []);
 
@@ -84,9 +92,6 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
   };
 
   //logica manipulacao de items- alvaro
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsdmFyb0BtYWlsLmNvbSIsImlhdCI6MTY4ODY2NjQwNCwiZXhwIjoxNjg4NjcwMDA0LCJzdWIiOiIyIn0.7cG5pCWJrKj2dnyieUtdEw4iLGy4k_UZQdUyk0veMD0";
-
   const addProduct = async (formData: TAddProductForm) => {
     try {
       const { data } = await api.post("/products", formData, {
@@ -96,8 +101,8 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
       });
       setProducts((products) => [...products, data]);
       toast.success(`Produto ${data.name} cadastrado com sucesso`);
-    } catch (error) {
-      toast.error("" + error);
+    } catch (error: any) {
+      toast.error(error.response.data);
     }
   };
 
@@ -112,8 +117,8 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
         products.filter((product) => product.id !== productId)
       );
       toast.success("Produto deletado com sucesso");
-    } catch (error) {
-      toast.error("" + error);
+    } catch (error: any) {
+      toast.error(error.response.data);
     }
   };
 
@@ -144,10 +149,15 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
         })
       );
       toast.success("Produto atualizado com sucesso");
-    } catch (error) {
-      toast.error("" + error);
+    } catch (error: any) {
+      toast.error(error.response.data);
     }
   };
+
+  //modal refs
+  const addModal = useRef<HTMLDialogElement>(null);
+  const editModal = useRef<HTMLDialogElement>(null);
+  const deleteModal = useRef<HTMLDialogElement>(null);
 
   return (
     <>
@@ -166,7 +176,10 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
           selectedProduct,
           setSelectedProduct,
           toggleCartModal,
-          addToCart,
+          addCartItem,
+          addModal,
+          deleteModal,
+          editModal,
         }}
       >
         {children}

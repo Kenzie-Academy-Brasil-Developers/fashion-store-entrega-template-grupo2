@@ -17,11 +17,12 @@ export const AddProductForm = () => {
     resolver: zodResolver(addProductFormSchema),
   });
 
-  const { addProduct } = useContext(ProductContext);
+  const { addProduct, addModal } = useContext(ProductContext);
 
   const submit: SubmitHandler<TAddProductForm> = (formData) => {
     addProduct(formData);
     reset();
+    addModal.current?.close();
   };
 
   return (
@@ -50,7 +51,7 @@ export const AddProductForm = () => {
       <FormTextareaInput
         errors={errors}
         inputName="description"
-        inputPlaceholder="Imagem (URL)"
+        inputPlaceholder="Descrição resumida"
         register={register}
       />
       <button className="btn btn-sm btn-primary w-fit self-end rounded-none text-xs font-oswald font-thin px-8 h-10 tracking-widest">

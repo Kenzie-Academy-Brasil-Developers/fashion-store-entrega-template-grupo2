@@ -25,7 +25,7 @@ export const CartProductCard = ({
           <img src={imgSource} />
         </div>
       </Link>
-      <div className="flex flex-col gap-6 items-start justify-center">
+      <div className="flex flex-col justify-between items-start">
         <Link
           to={`/product/${productId}`}
           className="font-oswald link-hover cursor-pointer"
@@ -33,7 +33,7 @@ export const CartProductCard = ({
           {productTitle}
         </Link>
         <p className="font-oswald">
-          {productPrice.toLocaleString("pt-BR", {
+          {Number(productPrice).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           })}

@@ -36,7 +36,7 @@ export interface IProductContext {
   addProduct: (formData: TAddProductForm) => Promise<void>;
   deleteProduct: (productId: number) => Promise<void>;
   toggleCartModal: () => void;
-  addToCart: (product: IProduct) => void;
+  addCartItem: (product: IProduct) => void;
   editProduct: (
     formData: TEditProductFormValues,
     productId: number
@@ -44,27 +44,18 @@ export interface IProductContext {
   selectedProduct: IProduct | undefined;
   setSelectedProduct: Dispatch<React.SetStateAction<IProduct | undefined>>;
   setCartProducts: React.Dispatch<React.SetStateAction<IProduct[] | []>>;
+  addModal: RefObject<HTMLDialogElement>;
+  editModal: RefObject<HTMLDialogElement>;
+  deleteModal: RefObject<HTMLDialogElement>;
 }
 
 export interface IProductListProps {
   productArray: IProduct[];
 }
 
-export interface IAddProductModal {
-  addModal: RefObject<HTMLDialogElement>;
-}
-
-export interface IDeleteProductModal {
-  deleteModal: RefObject<HTMLDialogElement>;
-}
-
 export interface IDisplayedProductProps {
   loading: boolean;
   product: IProduct;
-}
-
-export interface IEditProductModal {
-  editModal: RefObject<HTMLDialogElement>;
 }
 
 export interface IHighlightProductCardProps {
@@ -94,6 +85,4 @@ export interface IDashboardProductCard {
   productDescription: string;
   imgSource: string;
   productId: number;
-  editModal: RefObject<HTMLDialogElement>;
-  deleteModal: RefObject<HTMLDialogElement>;
 }

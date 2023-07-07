@@ -1,9 +1,8 @@
-import { IDeleteProductModal } from "../interfaces/productTypes";
 import { useContext } from "react";
 import { ProductContext } from "../providers/ProductContext";
 
-export const DeleteProductModal = ({ deleteModal }: IDeleteProductModal) => {
-  const { deleteProduct, setSelectedProduct, selectedProduct } =
+export const DeleteProductModal = () => {
+  const { deleteProduct, setSelectedProduct, deleteModal, selectedProduct } =
     useContext(ProductContext);
 
   return (

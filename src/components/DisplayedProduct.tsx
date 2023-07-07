@@ -7,7 +7,7 @@ export const DisplayedProduct = ({
   loading,
   product,
 }: IDisplayedProductProps) => {
-  const { addToCart } = useContext(ProductContext);
+  const { addCartItem } = useContext(ProductContext);
 
   return (
     <>
@@ -30,7 +30,7 @@ export const DisplayedProduct = ({
             {product.name}
           </h3>
           <p className="uppercase text-xl font-oswald font-normal">
-            {product.price.toLocaleString("pt-BR", {
+            {Number(product.price).toLocaleString("pt-BR", {
               style: "currency",
               currency: "BRL",
             })}
@@ -40,7 +40,7 @@ export const DisplayedProduct = ({
           </p>
           <button
             disabled={loading}
-            onClick={() => addToCart(product)}
+            onClick={() => addCartItem(product)}
             className="btn btn-primary flex-nowrap uppercase gap-3 mt-3 w-fit font-thin tracking-widest font-oswald items-center flex"
           >
             <BsCartPlus className="text-xl flex-shrink-0" />

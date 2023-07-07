@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import { AddProductForm } from "./AddProductForm";
-import { IAddProductModal } from "../interfaces";
+import { ProductContext } from "../providers/ProductContext";
 
-export const AddProductModal = ({ addModal }: IAddProductModal) => {
+export const AddProductModal = () => {
+  const { addModal } = useContext(ProductContext);
   return (
     <>
       <dialog

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { loginFormSchema, TLoginFormValues } from "./LoginFormResolver";
 import { FormTextInput } from "../../components/FormTextInput";
 import { useContext } from "react";
-import { UserContext } from "../../context/UserProvider";
+import { UserContext } from "../../providers/UserContext";
 
 export const FormLogin = () => {
   const {
@@ -14,14 +14,14 @@ export const FormLogin = () => {
   } = useForm<TLoginFormValues>({
     resolver: zodResolver(loginFormSchema),
   });
-   const {LoginAdm} = useContext(UserContext)
+  const { userLogin } = useContext(UserContext);
 
   return (
     <>
       <form
         noValidate
         className="w-full lg:max-w-sm flex flex-col gap-5 mr-auto"
-        onSubmit={handleSubmit(LoginAdm)}
+        onSubmit={handleSubmit(userLogin)}
       >
         <h1 className="font-oswald text-6xl uppercase font-medium leading-90 pb-2">
           Entrar

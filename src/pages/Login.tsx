@@ -24,7 +24,7 @@ export const Login = () => {
             loading ? "translate-y-5" : ""
           } flex flex-col justify-center lg:flex-row gap-10 items-center transition-all duration-1000`}
         >
-          <div className="rounded-lg lg:w-1/2">
+          <div className="rounded-lg lg:w-1/2 xl:w-2/3">
             <img src="https://i.ibb.co/M1yqphr/Rectangle-2-1.png" />
           </div>
           <FormLogin />

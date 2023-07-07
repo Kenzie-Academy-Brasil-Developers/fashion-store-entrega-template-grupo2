@@ -10,10 +10,9 @@ export const DashboardProductCard = ({
   productDescription,
   imgSource,
   productId,
-  editModal,
-  deleteModal,
 }: IDashboardProductCard) => {
-  const { setSelectedProduct } = useContext(ProductContext);
+  const { setSelectedProduct, editModal, deleteModal } =
+    useContext(ProductContext);
 
   const setProduct = () => {
     setSelectedProduct({
@@ -27,40 +26,46 @@ export const DashboardProductCard = ({
   };
 
   return (
-    <li className=" flex lg:justify-between  lg:mx-0 gap-10">
+    <li className=" flex flex-col lg:flex-row justify-between ">
       <div className="w-full flex items-center gap-4">
-        <img
-          src={imgSource}
-          alt="Item da loja"
-          className="w-20 md:w-fit md:h-32 rounded-xl"
-        />
-        <div className=" flex flex-col gap-4">
-          <h2 className="font-roboto font-bold">{productName}</h2>
-          <span className=" text-lg font-oswald font-normal">
-            {productPrice.toLocaleString("pt-BR", {
-              style: "currency",
-              currency: "BRL",
-            })}
-          </span>
+        <div className="overflow-hidden rounded-xl shrink-0">
+          <img
+            src={imgSource}
+            className="object-cover w-28 h-28 md:w-44 md:h-44"
+            alt="Item da loja"
+          />
         </div>
-      </div>
-      <div className="flex gap-10 md:gap-4">
-        <button
-          onClick={() => {
-            setProduct();
-            editModal.current?.showModal();
-          }}
-        >
-          <MdOutlineEdit size="2.25rem" />
-        </button>
-        <button
-          onClick={() => {
-            setProduct();
-            deleteModal.current?.showModal();
-          }}
-        >
-          <TfiTrash size="2.25rem" />
-        </button>
+        <div className=" flex flex-col justify-between w-full gap-4">
+          <div className="flex flex-col gap-4">
+            <h2 className="font-roboto font-bold">{productName}</h2>
+            <span className=" text-lg font-oswald font-normal">
+              {productPrice.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </span>
+          </div>
+          <div className="flex gap-4">
+            <button
+              className="h-fit"
+              onClick={() => {
+                setProduct();
+                editModal.current?.showModal();
+              }}
+            >
+              <MdOutlineEdit size="2.25rem" />
+            </button>
+            <button
+              className="h-fit"
+              onClick={() => {
+                setProduct();
+                deleteModal.current?.showModal();
+              }}
+            >
+              <TfiTrash size="2.25rem" />
+            </button>
+          </div>
+        </div>
       </div>
     </li>
   );
