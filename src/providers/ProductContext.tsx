@@ -29,6 +29,20 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
 
   const [editingProduct, setEditingProduct] = useState<IProduct | null>(null);
 
+  // Função para salvar os produtos do carrinho no localStorage
+  const saveCartProductsToLocalStorage = (cartProducts: IProduct[]) => {
+    localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+  };
+
+  // Carrega os produtos do carrinho do localStorage quando o componente for montado
+  useEffect(() => {
+    const savedCartProducts = localStorage.getItem("cartProducts");
+    if (savedCartProducts) {
+      setCartProducts(JSON.parse(savedCartProducts));
+      console.log(savedCartProducts);
+    }
+  }, []);
+
   const addProduct = async (formData: TAddProductForm) => {
     try {
       const { data } = await api.post("/products", formData, {
@@ -101,7 +115,6 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
   const selectId = (e: MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
     const productId = target.closest("li")?.id;
-    console.log(productId);
     setSelectedProductId(productId);
   };
   const removeCartItem = (e: MouseEvent<HTMLElement>) => {
@@ -115,6 +128,7 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
         (product) => product.id.toString() !== productId
       );
       setCartProducts(updatedArray);
+      saveCartProductsToLocalStorage(updatedArray);
     }
   };
   const addToCart = () => {
@@ -128,8 +142,14 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
         product.id === selectedProduct.id ? updatedDupe : product
       );
       setCartProducts(updatedArray);
+      saveCartProductsToLocalStorage(updatedArray);
+      console.log("oi");
     } else {
       setCartProducts([...cartProducts, { ...selectedProduct, quantity: 1 }]);
+      saveCartProductsToLocalStorage([
+        ...cartProducts,
+        { ...selectedProduct, quantity: 1 },
+      ]);
     }
   };
   const toggleCartModal = () => {
