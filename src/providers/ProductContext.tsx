@@ -61,6 +61,21 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsdmFyb0BtYWlsLmNvbSIsImlhdCI6MTY4ODY2NjQwNCwiZXhwIjoxNjg4NjcwMDA0LCJzdWIiOiIyIn0.7cG5pCWJrKj2dnyieUtdEw4iLGy4k_UZQdUyk0veMD0";
 
+  // Função para salvar os produtos do carrinho no localStorage
+  const saveCartProductsToLocalStorage = (cartProducts: IProduct[]) => {
+    localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+  };
+
+  // Carrega os produtos do carrinho do localStorage quando o componente for montado
+  useEffect(() => {
+    const savedCartProducts = localStorage.getItem("cartProducts");
+    if (savedCartProducts) {
+      setCartProducts(JSON.parse(savedCartProducts));
+      console.log(savedCartProducts);
+    }
+  }, []);
+
+
   const addProduct = async (formData: TAddProductForm) => {
     try {
       const { data } = await api.post("/products", formData, {
