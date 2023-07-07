@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useContext } from "react"
 import { ProductContext } from "../../providers/ProductContext"
 
-export const EditProcutForm = () =>{
+export const EditProductForm = () =>{
     const {editProduct, editingProduct} = useContext(ProductContext)
 
     const {register, reset, handleSubmit, formState: {errors}} = useForm<TEditProductForm>({

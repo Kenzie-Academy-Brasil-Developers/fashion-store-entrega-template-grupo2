@@ -2,14 +2,7 @@ import { BsCartPlus } from "react-icons/bs";
 import { useContext } from "react";
 import { ProductContext } from "../providers/ProductContext";
 import { LoadingSpinner } from "./LoadingSpinner";
-
-interface IHighlightProductCardProps {
-  imgSource: string;
-  productTitle: string;
-  productPrice: number;
-  productId: number;
-  loading: boolean;
-}
+import { IHighlightProductCardProps } from "../interfaces";
 
 export const HighlightProductCard = ({
   imgSource,

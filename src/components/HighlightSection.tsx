@@ -1,11 +1,5 @@
 import { ProductList } from "./ProductList";
-import { IProduct } from "../providers/ProductContext";
-import { RefObject } from "react";
-
-interface IHighlightSectionProps {
-  productArray: IProduct[];
-  highlightSectionRef: RefObject<HTMLElement> | undefined;
-}
+import { IHighlightSectionProps } from "../interfaces";
 
 export const HighlightSection = ({
   productArray,

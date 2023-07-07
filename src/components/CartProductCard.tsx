@@ -1,13 +1,6 @@
 import { useContext } from "react";
 import { ProductContext } from "../providers/ProductContext";
-
-interface ICartProductCardProps {
-  productTitle: string;
-  productPrice: number;
-  imgSource: string;
-  productQuantity: number;
-  productId: number;
-}
+import { ICartProductCardProps } from "../interfaces";
 
 export const CartProductCard = ({
   productTitle,

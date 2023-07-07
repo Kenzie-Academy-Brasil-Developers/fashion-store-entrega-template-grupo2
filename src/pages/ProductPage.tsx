@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../providers/ProductContext";
-import { IProduct } from "../providers/ProductContext";
+import { IProduct } from "../interfaces";
 import { Cart } from "../components/Cart";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { DisplayedProduct } from "../components/DisplayedProduct";
@@ -8,7 +8,6 @@ import { HighlightSection } from "../components/HighlightSection";
 
 export const ProductPage = ({ product }: { product: IProduct }) => {
   const { selectedProductId, products } = useContext(ProductContext);
-
 
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
