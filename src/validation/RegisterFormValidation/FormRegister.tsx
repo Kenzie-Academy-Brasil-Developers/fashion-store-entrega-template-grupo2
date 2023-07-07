@@ -1,46 +1,28 @@
-// interface IAdmin{
-//   id: number
-//   name: string
-//   email: string
-// }
-
-// interface IUserContext{
-//   loading: boolean
-//   user:  IAdmin
-//   LoginAdm: (formData : loginAdmProps) => Promise<void>
-//   RegisterAdm: (formData : registerAdmProps) => Promise<void>
-//   AdminLogout:() => Promise<void>
-// }
-
-//   const {loading} = useContext<any | IUserContext>(UserContext)
-//   console.log(loading);
-
-//   const onSubmit = async (formData : registerAdmProps ) => {
-//   };
-
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { BiArrowBack } from "react-icons/bi";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  registerFormSchema,
-  TRegisterFormValues,
-} from "./RegisterSchemaResolver";
+import { registerFormSchema, TRegisterFormValues} from "./RegisterSchemaResolver";
 import { FormTextInput } from "../../components/FormTextInput";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserProvider";
 
 export const FormRegister = () => {
   const {
     register,
     formState: { errors },
+    handleSubmit
   } = useForm<TRegisterFormValues>({
     resolver: zodResolver(registerFormSchema),
   });
+
+  const {RegisterAdm} = useContext(UserContext)
 
   return (
     <>
       <form
         className="w-full lg:max-w-sm flex flex-col gap-5 mr-auto"
-        // onSubmit={handleSubmit(registerAdm)}
+        onSubmit={handleSubmit(RegisterAdm)}
       >
         <div className="flex flex-col gap-3">
           <Link

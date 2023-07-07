@@ -9,11 +9,13 @@ import {
   MouseEvent,
   MutableRefObject,
 } from "react";
-import { api } from "../services/api";
+
 import { useNavigate, NavigateFunction } from "react-router-dom";
 import { toast} from "react-toastify";
 import { TAddProductForm } from "../components/AddProductForm/addProductFormSchema";
 import { TEditProductForm } from "../components/EditProductForm/editProductFormSchema";
+import { api } from "../services/Api";
+
 
 interface IProductContextProps {
   children: ReactNode;

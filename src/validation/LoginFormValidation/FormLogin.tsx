@@ -1,8 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { loginFormSchema, TLoginFormValues } from "./LoginFormResolver";
 import { FormTextInput } from "../../components/FormTextInput";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserProvider";
 
 export const FormLogin = () => {
   const {
@@ -12,14 +14,14 @@ export const FormLogin = () => {
   } = useForm<TLoginFormValues>({
     resolver: zodResolver(loginFormSchema),
   });
-  const onSubmit: SubmitHandler<TLoginFormValues> = (data) => console.log(data);
+   const {LoginAdm} = useContext(UserContext)
 
   return (
     <>
       <form
         noValidate
         className="w-full lg:max-w-sm flex flex-col gap-5 mr-auto"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(LoginAdm)}
       >
         <h1 className="font-oswald text-6xl uppercase font-medium leading-90 pb-2">
           Entrar
