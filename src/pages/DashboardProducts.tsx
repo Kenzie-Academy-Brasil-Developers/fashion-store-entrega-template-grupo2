@@ -5,10 +5,9 @@ import { Footer } from "../components/Footer";
 import { DashboardProductCard } from "../components/DashboardProductCard";
 import { EditProductModal } from "../components/EditProductModal";
 import { AddProductModal } from "../components/AddProductModal";
-
 import { useContext, useEffect, useRef, useState } from "react";
 import { ProductContext } from "../providers/ProductContext";
-//import { AdminContext } from "../context/AdminContext/AdminContext";
+import { DeleteProductModal } from "../components/DeleteProductModal";
 
 export const DashboardProducts = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -24,8 +23,9 @@ export const DashboardProducts = () => {
 
   const addModal = useRef<HTMLDialogElement>(null);
   const editModal = useRef<HTMLDialogElement>(null);
+  const deleteModal = useRef<HTMLDialogElement>(null);
 
-  const {products} = useContext(ProductContext)
+  const { products } = useContext(ProductContext);
 
   return (
     <>
@@ -39,6 +39,7 @@ export const DashboardProducts = () => {
           <DashboardNavbar />
           <EditProductModal editModal={editModal} />
           <AddProductModal addModal={addModal} />
+          <DeleteProductModal deleteModal={deleteModal} />
           <div className="flex gap-10 md:items-center">
             <div className=" flex flex-col gap-8">
               <h1 className="font-oswald text-4xl md:text-6xl font-medium">
@@ -59,19 +60,18 @@ export const DashboardProducts = () => {
             </button>
           </div>
           <ul className="grid grid-cols-1 md:grid-cols-2 mx-auto gap-10 w-full list-none">
-            {
-              products.map(product=>(
-                <DashboardProductCard
-                  key={product.id}
-                  productName={product.name}
-                  productPrice={Number(product.price)}
-                  productDescription = {product.description}
-                  imgSource={product.image}
-                  editModal={editModal}
-                  productId={product.id}
-                />
-              ))
-            }
+            {products.map((product) => (
+              <DashboardProductCard
+                key={product.id}
+                productName={product.name}
+                productPrice={Number(product.price)}
+                productDescription={product.description}
+                imgSource={product.image}
+                editModal={editModal}
+                productId={product.id}
+                deleteModal={deleteModal}
+              />
+            ))}
           </ul>
         </div>
       </main>
