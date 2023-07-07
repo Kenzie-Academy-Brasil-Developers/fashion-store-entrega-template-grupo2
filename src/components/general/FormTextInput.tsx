@@ -31,7 +31,7 @@ export const FormTextInput = ({
         type={inputType}
         placeholder={inputPlaceholder}
         autoComplete="current-password"
-        {...register(inputName)} // Call the register function with the inputName as argument
+        {...register(inputName)}
       />
       {errors[inputName] && (
         <p className="text-red-500 text-xs font-roboto">

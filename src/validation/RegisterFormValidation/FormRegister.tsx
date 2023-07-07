@@ -6,7 +6,7 @@ import {
   registerFormSchema,
   TRegisterFormValues,
 } from "./RegisterSchemaResolver";
-import { FormTextInput } from "../../components/FormTextInput";
+import { FormTextInput } from "../../components/general/FormTextInput";
 import { useContext } from "react";
 import { UserContext } from "../../providers/UserContext";
 

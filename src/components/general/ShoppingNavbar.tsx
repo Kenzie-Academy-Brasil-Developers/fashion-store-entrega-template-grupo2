@@ -1,8 +1,8 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { ProductContext } from "../providers/ProductContext";
-import { IProduct } from "../interfaces";
+import { ProductContext } from "../../providers/ProductContext";
+import { IProduct } from "../../interfaces";
 import { BiUserCircle } from "react-icons/bi";
 
 export const ShoppingNavbar = () => {

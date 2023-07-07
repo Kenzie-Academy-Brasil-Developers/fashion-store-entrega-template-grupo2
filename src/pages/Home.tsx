@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import { ProductContext } from "../providers/ProductContext";
-import { Cart } from "../components/Cart";
-import { HighlightSection } from "../components/HighlightSection";
-import { Hero } from "../components/Hero";
+import { Cart } from "../components/cart/Cart";
+import { HighlightSection } from "../components/general/HighlightSection";
+import { Hero } from "../components/home/Hero";
 
 export const Home = () => {
   const { products } = useContext(ProductContext);

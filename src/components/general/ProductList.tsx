@@ -1,5 +1,5 @@
 import { HighlightProductCard } from "./HighlightProductCard";
-import { IProductListProps } from "../interfaces";
+import { IProductListProps } from "../../interfaces";
 
 export const ProductList = ({ productArray }: IProductListProps) => {
   return (
@@ -11,7 +11,6 @@ export const ProductList = ({ productArray }: IProductListProps) => {
           productTitle={product.name}
           imgSource={product.image}
           productId={product.id}
-          loading={false}
         />
       ))}
     </ul>

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AddProductForm } from "./AddProductForm";
-import { ProductContext } from "../providers/ProductContext";
+import { ProductContext } from "../../providers/ProductContext";
 
 export const AddProductModal = () => {
   const { addModal } = useContext(ProductContext);

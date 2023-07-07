@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../providers/ProductContext";
 import { IProduct } from "../interfaces";
-import { Cart } from "../components/Cart";
-import { Breadcrumbs } from "../components/Breadcrumbs";
-import { DisplayedProduct } from "../components/DisplayedProduct";
-import { HighlightSection } from "../components/HighlightSection";
+import { Cart } from "../components/cart/Cart";
+import { Breadcrumbs } from "../components/productPage/Breadcrumbs";
+import { DisplayedProduct } from "../components/productPage/DisplayedProduct";
+import { HighlightSection } from "../components/general/HighlightSection";
 
 export const ProductPage = ({ product }: { product: IProduct }) => {
   const { products, cartModal } = useContext(ProductContext);

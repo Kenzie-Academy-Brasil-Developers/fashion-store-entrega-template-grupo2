@@ -3,9 +3,7 @@ import {
   IProductContext,
   IProductContextProps,
   IProductListProps,
-  IAddProductModal,
   IDisplayedProductProps,
-  IEditProductModal,
   IProductCart,
   IHighlightProductCardProps,
   IHighlightSectionProps,
@@ -13,17 +11,28 @@ import {
   IDashboardProductCard,
 } from "./productTypes";
 
+import {
+  IRegisterProps,
+  userProviderProps,
+  ILoginProps,
+  IUserContext,
+  IUser,
+} from "./userTypes";
+
 export {
   IProduct,
   IProductContext,
   IProductContextProps,
   IProductListProps,
-  IAddProductModal,
   IDisplayedProductProps,
-  IEditProductModal,
   IProductCart,
   IHighlightProductCardProps,
   IHighlightSectionProps,
   ICartProductCardProps,
   IDashboardProductCard,
+  IRegisterProps,
+  userProviderProps,
+  ILoginProps,
+  IUserContext,
+  IUser,
 };

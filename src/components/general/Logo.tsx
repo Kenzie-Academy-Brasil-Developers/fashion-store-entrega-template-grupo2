@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { GrLogout } from "react-icons/gr";
-import { UserContext } from "../providers/UserContext";
+import { UserContext } from "../../providers/UserContext";
 
 export const Logo = () => {
   const { userLogout } = useContext(UserContext);

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ProductContext } from "../providers/ProductContext";
+import { ProductContext } from "../../providers/ProductContext";
 
 export const DeleteProductModal = () => {
   const { deleteProduct, setSelectedProduct, deleteModal, selectedProduct } =

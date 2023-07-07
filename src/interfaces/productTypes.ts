@@ -6,8 +6,8 @@ import {
   RefObject,
 } from "react";
 import { NavigateFunction } from "react-router-dom";
-import { TAddProductForm } from "../components/AddProductForm/addProductFormSchema";
-import { TEditProductFormValues } from "../components/EditProductForm/editProductFormSchema";
+import { TAddProductForm } from "../components/addProduct/addProductFormSchema";
+import { TEditProductFormValues } from "../components/editProduct/editProductFormSchema";
 
 export interface IProductContextProps {
   children: ReactNode;
@@ -63,7 +63,6 @@ export interface IHighlightProductCardProps {
   productTitle: string;
   productPrice: number;
   productId: number;
-  loading: boolean;
 }
 
 export interface IHighlightSectionProps {

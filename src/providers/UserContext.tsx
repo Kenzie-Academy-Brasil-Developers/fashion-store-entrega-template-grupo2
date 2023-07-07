@@ -1,39 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/Api";
-import { ReactNode, createContext, useState } from "react";
+import { createContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-
-interface userProviderProps {
-  children: ReactNode;
-}
-
-export interface IRegisterProps {
-  name: string;
-  email: string;
-  password: string;
-  confirm: string;
-}
-
-export interface ILoginProps {
-  email: string;
-  password: string;
-}
-
-interface IUserContext {
-  user: IUser | undefined;
-  userLogin: (formData: ILoginProps) => Promise<void>;
-  userRegister: (formData: IRegisterProps) => Promise<void>;
-  userLogout: () => void;
-  token: string | null;
-}
-
-interface IUser {
-  confirm: string;
-  email: string;
-  id: number;
-  name: string;
-}
+import {
+  IUserContext,
+  IUser,
+  ILoginProps,
+  IRegisterProps,
+  userProviderProps,
+} from "../interfaces/index";
 
 export const UserContext = createContext({} as IUserContext);
 

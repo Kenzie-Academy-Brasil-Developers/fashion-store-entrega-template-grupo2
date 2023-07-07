@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { ProductContext } from "../providers/ProductContext";
-import { ICartProductCardProps } from "../interfaces";
+import { ProductContext } from "../../providers/ProductContext";
+import { ICartProductCardProps } from "../../interfaces";
 import { Link } from "react-router-dom";
 
 export const CartProductCard = ({
