@@ -35,6 +35,7 @@ export interface IProductContext {
   removeCartItem: (id: string) => void;
   addProduct: (formData: TAddProductForm) => Promise<void>;
   deleteProduct: (productId: number) => Promise<void>;
+  toggleCartModal: () => void;
   editProduct: (
     formData: TEditProductFormValues,
     productId: number
