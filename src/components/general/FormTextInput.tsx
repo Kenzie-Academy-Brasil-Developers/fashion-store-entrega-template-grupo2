@@ -27,7 +27,11 @@ export const FormTextInput = ({
   return (
     <div className="flex flex-col gap-1">
       <input
-        className="font-oswald input lg:input-md md:input-lg w-full bg-gray-100 placeholder:uppercase placeholder:text-gray-500"
+        className={`${
+          errors[inputName]
+            ? "border-red-500 focus:border-red-500"
+            : "focus:border-primary"
+        } transition-all duration-300 font-oswald outline-none focus:outline-none input lg:input-md md:input-lg w-full bg-gray-100 placeholder:uppercase placeholder:text-gray-500`}
         type={inputType}
         placeholder={inputPlaceholder}
         autoComplete="current-password"
