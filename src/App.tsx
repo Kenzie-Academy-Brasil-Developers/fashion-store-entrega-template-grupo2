@@ -1,11 +1,24 @@
+import { RoutesMain } from "./routes/routesMain";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
 function App() {
   return (
-    <div>
-      <p className="font-oswald text-5xl text-primary absolute bottom-1/2 left-1/2 -translate-x-1/2 ">
-        Bom trabalho, galera! :)
-      </p>
-    </div>
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <RoutesMain />
+    </>
   );
 }
-
 export default App;
