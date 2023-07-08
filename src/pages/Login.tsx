@@ -1,4 +1,4 @@
-import { Logo } from "../components/general/Logo";
+import { Link } from "react-router-dom";
 import { Footer } from "../components/general/Footer";
 import { FormLogin } from "../validation/LoginFormValidation/FormLogin";
 import { useEffect, useState } from "react";
@@ -17,9 +17,12 @@ export const Login = () => {
 
   return (
     <>
-      <span className="uppercase absolute top-3 right-1/2 translate-x-1/2 font-oswald font-medium text-sm md:text-lg tracking-wide select-none">
+      <Link
+        to="/"
+        className="uppercase absolute top-3 right-1/2 translate-x-1/2 font-oswald font-medium text-sm md:text-lg tracking-wide select-none"
+      >
         Fashionstore
-      </span>
+      </Link>
       <main className="w-5/6 mx-auto min-h-screen flex justify-center py-16">
         <div
           className={`${
