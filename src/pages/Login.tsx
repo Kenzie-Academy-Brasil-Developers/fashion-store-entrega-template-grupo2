@@ -1,12 +1,18 @@
 import { Link } from "react-router-dom";
 import { Footer } from "../components/general/Footer";
 import { FormLogin } from "../validation/LoginFormValidation/FormLogin";
-import { useContext } from "react";
-import { UserContext } from "../providers/UserContext";
+import { useEffect, useState } from "react";
 import { Logo } from "../components/general/Logo";
 
 export const Login = () => {
-  const { loading } = useContext(UserContext);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 100);
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <>

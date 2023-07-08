@@ -2,14 +2,22 @@ import { useContext, useRef } from "react";
 import { ProductContext } from "../providers/ProductContext";
 import { HighlightSection } from "../components/general/HighlightSection";
 import { Hero } from "../components/home/Hero";
-import { UserContext } from "../providers/UserContext";
+import { useEffect, useState } from "react";
 import { Cart } from "../components/cart/Cart";
 
 export const Home = () => {
   const { products } = useContext(ProductContext);
-  const { loading } = useContext(UserContext);
 
   const highlightSectionRef = useRef<HTMLElement>(null);
+
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 100);
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <Cart>

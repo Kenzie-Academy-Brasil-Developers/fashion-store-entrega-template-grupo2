@@ -14,8 +14,8 @@ export const DisplayedProduct = ({
       <div
         className={`${
           loading
-            ? "opacity-0 translate-y-3 select-none "
-            : "transition-all duration-1000"
+            ? "opacity-0  select-none"
+            : "transition-all translate-y-3 duration-1000"
         } flex flex-col sm:flex-row gap-10 justify-center items-center`}
       >
         <div className="bg-base-200 overflow-hidden rounded-3xl max-h-[30rem] lg:h-[30rem] max-w-[24rem]">

@@ -1,11 +1,19 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DashboardNavbar } from "../components/dashboard/DashboardNavbar";
 import { Footer } from "../components/general/Footer";
 import { Logo } from "../components/general/Logo";
 import { UserContext } from "../providers/UserContext";
 
 export const DashboardHome = () => {
-  const { loading, user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 100);
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <>

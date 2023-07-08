@@ -8,11 +8,18 @@ import { AddProductModal } from "../components/addProduct/AddProductModal";
 import { useContext } from "react";
 import { ProductContext } from "../providers/ProductContext";
 import { DeleteProductModal } from "../components/dashboard/DeleteProductModal";
-import { UserContext } from "../providers/UserContext";
+import { useEffect, useState } from "react";
 
 export const DashboardProducts = () => {
   const { products, addModal } = useContext(ProductContext);
-  const { loading } = useContext(UserContext);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 100);
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <>

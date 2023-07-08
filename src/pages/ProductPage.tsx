@@ -4,18 +4,23 @@ import { IProduct } from "../interfaces";
 import { Breadcrumbs } from "../components/productPage/Breadcrumbs";
 import { DisplayedProduct } from "../components/productPage/DisplayedProduct";
 import { HighlightSection } from "../components/general/HighlightSection";
-import { UserContext } from "../providers/UserContext";
 import { Cart } from "../components/cart/Cart";
 
 export const ProductPage = ({ product }: { product: IProduct }) => {
-  const { loading } = useContext(UserContext);
   const { products } = useContext(ProductContext);
 
+  const [loading, setLoading] = useState<boolean>(true);
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
 
   useEffect(() => {
+    setLoading(true);
     const filteredArray = products.filter((item) => item.id !== product.id);
     setFilteredProducts(filteredArray);
+
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 300);
+    return () => clearTimeout(timeout);
   }, [product]);
 
   return (
