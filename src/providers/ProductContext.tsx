@@ -19,6 +19,16 @@ export const ProductContext = createContext({} as IProductContext);
 export const ProductProvider = ({ children }: IProductContextProps) => {
   const { token } = useContext(UserContext);
 
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const { data } = await api.get("/products");
+        setProducts(data);
+      } catch (e) {}
+    };
+    loadProducts();
+  }, []);
+
   const [products, setProducts] = useState<IProduct[]>([]);
   const [cartProducts, setCartProducts] = useState<IProduct[] | []>([]);
   const [selectedProduct, setSelectedProduct] = useState<
@@ -53,15 +63,27 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
     }
   };
 
+  const [cartCount, setCartCount] = useState<number>(0);
+  const [cartTotal, setCartTotal] = useState<number>(0);
+
+  const sumCartProperty = (property: keyof IProduct) => {
+    const itemTotal = (cartProducts as IProduct[]).reduce(
+      (accumulator: number, product: IProduct) => {
+        const value = product[property];
+        if (typeof value === "number") {
+          return accumulator + value;
+        }
+        return accumulator;
+      },
+      0
+    );
+    return itemTotal;
+  };
+
   useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const { data } = await api.get("/products");
-        setProducts(data);
-      } catch (e) {}
-    };
-    loadProducts();
-  }, []);
+    setCartCount(sumCartProperty("quantity"));
+    setCartTotal(sumCartProperty("price"));
+  }, [cartProducts]);
 
   const saveCartProducts = (cartProducts: IProduct[]) => {
     localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
@@ -169,6 +191,8 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
           addModal,
           deleteModal,
           editModal,
+          cartCount,
+          cartTotal,
         }}
       >
         {children}

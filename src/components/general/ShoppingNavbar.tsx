@@ -1,23 +1,11 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { ProductContext } from "../../providers/ProductContext";
-import { IProduct } from "../../interfaces";
 import { BiUserCircle } from "react-icons/bi";
 
 export const ShoppingNavbar = () => {
-  const { cartProducts, toggleCartModal } = useContext(ProductContext);
-  const [cartCount, setCartCount] = useState<Number>(0);
-
-  useEffect(() => {
-    const itemTotal = (cartProducts as IProduct[]).reduce(
-      (accumulator: number, product: IProduct) => {
-        return accumulator + product.quantity!;
-      },
-      0
-    );
-    setCartCount(itemTotal);
-  }, [cartProducts]);
+  const { toggleCartModal, cartCount } = useContext(ProductContext);
 
   return (
     <nav className="fixed top-0 w-full bg-base-100 z-10">
