@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { ProductContext } from "../providers/ProductContext";
 
 import { PublicRoutes } from "./publicRoutes/PublicRoutes";
-import { ProtectedRoutes } from "./protectedRoutes/ProtcedRoutes";
+import { ProtectedRoutes } from "./protectedRoutes/ProtectedRoutes";
 
 export const RoutesMain = () => {
   const { products } = useContext(ProductContext);

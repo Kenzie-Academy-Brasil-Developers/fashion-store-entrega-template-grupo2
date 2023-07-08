@@ -7,9 +7,9 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
 import { ProductContext } from "../../providers/ProductContext";
-import { FormTextInput } from "../FormTextInput";
+import { FormTextInput } from "../general/FormTextInput";
 import { useEffect } from "react";
-import { FormTextareaInput } from "../FormTextareaInput";
+import { FormTextareaInput } from "../general/FormTextareaInput";
 
 export const EditProductForm = () => {
   const { selectedProduct, editProduct, editModal } =

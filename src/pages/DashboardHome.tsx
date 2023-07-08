@@ -1,6 +1,6 @@
-import { DashboardNavbar } from "../components/DashboardNavbar";
-import { Footer } from "../components/Footer";
-import { Logo } from "../components/Logo";
+import { DashboardNavbar } from "../components/dashboard/DashboardNavbar";
+import { Footer } from "../components/general/Footer";
+import { Logo } from "../components/general/Logo";
 import { useEffect, useState } from "react";
 
 export const DashboardHome = () => {
@@ -29,7 +29,7 @@ export const DashboardHome = () => {
             PAINEL DO ADMINISTRADOR
           </h1>
           <p className=" text-xl font-roboto font-normal">
-            Seja bem vindo, administrador!
+            Seja bem-vindo, administrador!
           </p>
         </div>
       </main>

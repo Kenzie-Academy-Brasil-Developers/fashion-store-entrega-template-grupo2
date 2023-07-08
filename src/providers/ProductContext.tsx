@@ -3,35 +3,28 @@ import {
   useRef,
   useEffect,
   createContext,
-  ReactNode,
   MutableRefObject,
 } from "react";
 import { api } from "../services/Api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { TAddProductForm } from "../components/AddProductForm/addProductFormSchema";
-import { TEditProductFormValues } from "../components/EditProductForm/editProductFormSchema";
-import { IProduct, IProductContext } from "../interfaces";
+import { TAddProductForm } from "../components/addProduct/addProductFormSchema";
+import { TEditProductFormValues } from "../components/editProduct/editProductFormSchema";
+import { IProduct, IProductContext, IProductContextProps } from "../interfaces";
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
-
-interface IProductContextProps {
-  children: ReactNode;
-}
 
 export const ProductContext = createContext({} as IProductContext);
 
 export const ProductProvider = ({ children }: IProductContextProps) => {
   const { token } = useContext(UserContext);
 
-  //estados loja/carrinho - marcelino
   const [products, setProducts] = useState<IProduct[]>([]);
   const [cartProducts, setCartProducts] = useState<IProduct[] | []>([]);
   const [selectedProduct, setSelectedProduct] = useState<
     IProduct | undefined
   >();
 
-  //cart logic
   const addCartItem = (product: IProduct) => {
     const dupe = cartProducts.find((item) => item.id === product.id);
     if (dupe) {
@@ -70,12 +63,10 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
     loadProducts();
   }, []);
 
-  // Função para salvar os produtos do carrinho no localStorage
   const saveCartProducts = (cartProducts: IProduct[]) => {
     localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
   };
 
-  // Carrega os produtos do carrinho do localStorage quando o componente for montado
   useEffect(() => {
     const savedCartProducts = localStorage.getItem("cartProducts");
     if (savedCartProducts) {
@@ -91,7 +82,6 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
       cartModal.current.checked = !cartModal.current.checked;
   };
 
-  //logica manipulacao de items- alvaro
   const addProduct = async (formData: TAddProductForm) => {
     try {
       const { data } = await api.post("/products", formData, {
@@ -154,7 +144,6 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
     }
   };
 
-  //modal refs
   const addModal = useRef<HTMLDialogElement>(null);
   const editModal = useRef<HTMLDialogElement>(null);
   const deleteModal = useRef<HTMLDialogElement>(null);

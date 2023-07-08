@@ -4,8 +4,8 @@ import { TAddProductForm, addProductFormSchema } from "./addProductFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
 import { ProductContext } from "../../providers/ProductContext";
-import { FormTextInput } from "../FormTextInput";
-import { FormTextareaInput } from "../FormTextareaInput";
+import { FormTextInput } from "../general/FormTextInput";
+import { FormTextareaInput } from "../general/FormTextareaInput";
 
 export const AddProductForm = () => {
   const {

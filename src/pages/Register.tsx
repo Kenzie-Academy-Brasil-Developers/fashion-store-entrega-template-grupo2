@@ -1,5 +1,5 @@
-import { Logo } from "../components/Logo";
-import { Footer } from "../components/Footer";
+import { Logo } from "../components/general/Logo";
+import { Footer } from "../components/general/Footer";
 import { FormRegister } from "../validation/RegisterFormValidation/FormRegister";
 import { useState, useEffect } from "react";
 

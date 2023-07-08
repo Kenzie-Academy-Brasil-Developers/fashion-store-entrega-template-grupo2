@@ -1,5 +1,5 @@
 import { ProductList } from "./ProductList";
-import { IHighlightSectionProps } from "../interfaces";
+import { IHighlightSectionProps } from "../../interfaces";
 
 export const HighlightSection = ({
   productArray,

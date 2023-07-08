@@ -1,13 +1,13 @@
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { Logo } from "../components/Logo";
-import { DashboardNavbar } from "../components/DashboardNavbar";
-import { Footer } from "../components/Footer";
-import { DashboardProductCard } from "../components/DashboardProductCard";
-import { EditProductModal } from "../components/EditProductModal";
-import { AddProductModal } from "../components/AddProductModal";
+import { Logo } from "../components/general/Logo";
+import { DashboardNavbar } from "../components/dashboard/DashboardNavbar";
+import { Footer } from "../components/general/Footer";
+import { DashboardProductCard } from "../components/dashboard/DashboardProductCard";
+import { EditProductModal } from "../components/editProduct/EditProductModal";
+import { AddProductModal } from "../components/addProduct/AddProductModal";
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../providers/ProductContext";
-import { DeleteProductModal } from "../components/DeleteProductModal";
+import { DeleteProductModal } from "../components/dashboard/DeleteProductModal";
 
 export const DashboardProducts = () => {
   const [loading, setLoading] = useState<boolean>(true);
