@@ -10,7 +10,7 @@ interface ICartProps {
 }
 
 export const Cart: React.FC<ICartProps> = ({ children }) => {
-  const { cartProducts, cartModal, toggleCartModal } =
+  const { cartProducts, cartModal, toggleCartModal, cartTotal } =
     useContext(ProductContext);
 
   return (
@@ -39,6 +39,19 @@ export const Cart: React.FC<ICartProps> = ({ children }) => {
             } absolute select-none right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2 text-center text-2xl font-roboto text-gray-400`}
           >
             Não há itens no carrinho :(
+          </span>
+          <span
+            className={`${
+              cartProducts.length < 1 ? "hidden" : ""
+            } absolute flex gap-2 select-none bottom-4 left-4 text-center text-xl font-oswald uppercase `}
+          >
+            TOTAL:
+            <span className="font-medium">
+              {cartTotal.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </span>
           </span>
           {cartProducts.map((product) => {
             return (
