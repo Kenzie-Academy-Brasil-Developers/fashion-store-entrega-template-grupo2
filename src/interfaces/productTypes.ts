@@ -47,6 +47,8 @@ export interface IProductContext {
   addModal: RefObject<HTMLDialogElement>;
   editModal: RefObject<HTMLDialogElement>;
   deleteModal: RefObject<HTMLDialogElement>;
+  cartCount: Number;
+  cartTotal: number;
 }
 
 export interface IProductListProps {
