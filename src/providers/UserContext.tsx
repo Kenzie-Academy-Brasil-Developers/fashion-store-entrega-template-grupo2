@@ -15,6 +15,7 @@ export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: userProviderProps) => {
   const [user, setUser] = useState<IUser>();
+  const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
   const LOCAL_STORAGE_KEY = "@TOKEN";
   const token = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -56,7 +57,15 @@ export const UserProvider = ({ children }: userProviderProps) => {
 
   return (
     <UserContext.Provider
-      value={{ token, user, userLogin, userLogout, userRegister }}
+      value={{
+        token,
+        user,
+        userLogin,
+        loading,
+        setLoading,
+        userLogout,
+        userRegister,
+      }}
     >
       {children}
     </UserContext.Provider>

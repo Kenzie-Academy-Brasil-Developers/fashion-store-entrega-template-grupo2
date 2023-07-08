@@ -5,23 +5,14 @@ import { Footer } from "../components/general/Footer";
 import { DashboardProductCard } from "../components/dashboard/DashboardProductCard";
 import { EditProductModal } from "../components/editProduct/EditProductModal";
 import { AddProductModal } from "../components/addProduct/AddProductModal";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { ProductContext } from "../providers/ProductContext";
 import { DeleteProductModal } from "../components/dashboard/DeleteProductModal";
+import { UserContext } from "../providers/UserContext";
 
 export const DashboardProducts = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    window.scroll(0, 0);
-
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 300);
-    return () => clearTimeout(timeout);
-  }, []);
-
   const { products, addModal } = useContext(ProductContext);
+  const { loading } = useContext(UserContext);
 
   return (
     <>

@@ -51,6 +51,10 @@ export interface IProductContext {
   cartTotal: number;
 }
 
+export interface ICartProps {
+  children: ReactNode;
+}
+
 export interface IProductListProps {
   productArray: IProduct[];
 }

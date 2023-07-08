@@ -1,19 +1,11 @@
+import { useContext } from "react";
 import { DashboardNavbar } from "../components/dashboard/DashboardNavbar";
 import { Footer } from "../components/general/Footer";
 import { Logo } from "../components/general/Logo";
-import { useEffect, useState } from "react";
+import { UserContext } from "../providers/UserContext";
 
 export const DashboardHome = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    window.scroll(0, 0);
-
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 300);
-    return () => clearTimeout(timeout);
-  }, []);
+  const { loading, user } = useContext(UserContext);
 
   return (
     <>
@@ -29,7 +21,7 @@ export const DashboardHome = () => {
             PAINEL DO ADMINISTRADOR
           </h1>
           <p className=" text-xl font-roboto font-normal">
-            Seja bem-vindo, administrador!
+            Seja bem-vindo, <strong>{user?.name}</strong>!
           </p>
         </div>
       </main>

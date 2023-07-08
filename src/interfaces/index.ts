@@ -9,6 +9,7 @@ import {
   IHighlightSectionProps,
   ICartProductCardProps,
   IDashboardProductCard,
+  ICartProps,
 } from "./productTypes";
 
 import {
@@ -35,4 +36,5 @@ export {
   ILoginProps,
   IUserContext,
   IUser,
+  ICartProps,
 };

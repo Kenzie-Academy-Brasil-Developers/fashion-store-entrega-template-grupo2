@@ -1,27 +1,17 @@
 import { Link } from "react-router-dom";
 import { Footer } from "../components/general/Footer";
 import { FormRegister } from "../validation/RegisterFormValidation/FormRegister";
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { UserContext } from "../providers/UserContext";
+import { Logo } from "../components/general/Logo";
 
 export const Register = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    window.scroll(0, 0);
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 100);
-
-    return () => clearTimeout(timeout);
-  }, []);
+  const { loading } = useContext(UserContext);
 
   return (
     <>
-      <Link
-        to="/"
-        className="uppercase absolute top-3 right-1/2 translate-x-1/2 font-oswald font-medium text-sm md:text-lg tracking-wide select-none"
-      >
-        Fashionstore
+      <Link to="/">
+        <Logo />
       </Link>
       <main className="w-5/6 mx-auto min-h-screen flex justify-center py-16">
         <div

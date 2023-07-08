@@ -1,13 +1,9 @@
-import { ReactNode } from "react";
 import { CartProductCard } from "./CartProductCard";
 import { Footer } from "../general/Footer";
 import { ShoppingNavbar } from "../general/ShoppingNavbar";
 import { useContext } from "react";
 import { ProductContext } from "../../providers/ProductContext";
-
-interface ICartProps {
-  children: ReactNode;
-}
+import { ICartProps } from "../../interfaces";
 
 export const Cart: React.FC<ICartProps> = ({ children }) => {
   const { cartProducts, cartModal, toggleCartModal, cartTotal } =

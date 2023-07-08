@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { Dispatch, ReactNode } from "react";
 
 export interface userProviderProps {
   children: ReactNode;
@@ -22,6 +22,8 @@ export interface IUserContext {
   userRegister: (formData: IRegisterProps) => Promise<void>;
   userLogout: () => void;
   token: string | null;
+  setLoading: Dispatch<React.SetStateAction<boolean>>;
+  loading: boolean;
 }
 
 export interface IUser {
