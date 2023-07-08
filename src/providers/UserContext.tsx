@@ -43,7 +43,7 @@ export const UserProvider = ({ children }: userProviderProps) => {
       reset();
       setTimeout(() => {
         navigate("/login");
-      }, 3000);
+      }, 1000);
     } catch (error: any) {
       toast.error(error.response.data);
     }
