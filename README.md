@@ -15,13 +15,14 @@
      </ul>
    </div>
   <div>
-    <h2>Estilização<h2/>
+    <h2>Escolhas de Estilização<h2/>
       <ul>
         <li>
-          <p> aplicação deverá ser um clone deste
-            <a href="https://www.figma.com/file/PjMqKkuTOt87DcufrQ0WJV/Fashion-Store?type=design&node-id=0-1&mode=design" target="_blank">Figma</a>
-          <p/>
-        <li/>
+          Styled Components 
+        </li>
+        <li>
+          Tailwind CSS
+        </li>
       <ul/>
   </div>
   <div>
@@ -71,6 +72,49 @@ Ao excluir um produto, uma mensagem de confirmação deve ser exibida.</p>
 <p>Além disso, é preciso utilizar uma biblioteca de estilo/componente, como tailwind, scss, stitches, radix, chackra UI ou Styled-Components.<br>
 Gostaríamos de ressaltar que este projeto tem como objetivo o trabalho em grupo, mas também explorar novas tecnologias e, embora o uso do Styled-Components seja permitido, seria bastante interessante ver o grupo se arriscando e experimentando outras bibliotecas mencionadas acima.</p>
   </div>
+  <ul>
+    <h1>bibliotecas usadas</h1>
+    <li>
+      <h2>React Icons</h2>
+      <p>npm i react-icons</p>
+      <a href="https://react-icons.github.io" target="_blank">Doc - React Icons</a>
+    </li>
+    <li>
+      <h2>React Hook Form</h2>
+      <p>npm i react-hook-form</p>
+      <a href="https://react-hook-form.com" target="_blank">Doc - Home | React Hook Form - Simple React forms validation</a>
+    </li>
+    <li>
+      <h2>Axios</h2>
+      <p>npm i axios</p>
+      <a href="https://axios-http.com" target="_blank">Doc - Getting Started | Axios Docs</a>
+    </li>
+    <li>
+      <h2>React Router Dom</h2>
+      <p>npm i react-router-dom</p>
+      <a href="https://reactrouter.com" target="_blank">Doc - Home v6.14.1 | React Router</a>
+    </li>
+    <li>
+      <h2>Zod</h2>
+      <p>npm i zod</p>
+      <a href="https://github.com/colinhacks/zod" target="_blank">Doc - Zod | Documentation</a>
+    </li>
+    <li>
+      <h2>React-Toastify</h2>
+      <p>npm i react-toastify</p>
+      <a href="https://fkhadra.github.io/react-toastify" target="_blank">Doc - React-toastify | React-Toastify</a>
+    </li>
+    <li>
+      <h2>Tailwind CSS</h2>
+      <p>Install Tailwind CSS with Vite</p>
+      <a href="https://tailwindcss.com" target="_blank">Tailwind CSS</a>
+    </li>
+    <li>
+      <h2>DaisyUI</h2>
+      <p>Install daisyUI as a Tailwind CSS plugin</p>
+      <a href="https://daisyui.com" target="_blank">DaisyUI - Tailwind CSS Components</a>
+    </li>
+  </ul>
   <div>
     <ul>
       <h2>Membros do Grupo<h2/>
