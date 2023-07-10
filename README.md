@@ -18,9 +18,6 @@
     <h2>Escolhas de Estilização<h2/>
       <ul>
         <li>
-          Styled Components 
-        </li>
-        <li>
           Tailwind CSS
         </li>
       <ul/>
