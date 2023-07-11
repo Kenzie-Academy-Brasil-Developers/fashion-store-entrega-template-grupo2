@@ -19,12 +19,19 @@ export const ProductContext = createContext({} as IProductContext);
 export const ProductProvider = ({ children }: IProductContextProps) => {
   const { token } = useContext(UserContext);
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   useEffect(() => {
     const loadProducts = async () => {
+      setLoading(true);
       try {
         const { data } = await api.get("/products");
         setProducts(data);
-      } catch (e) {}
+      } catch (error: any) {
+        toast.error(error.data.response.data);
+      } finally {
+        setLoading(false);
+      }
     };
     loadProducts();
   }, []);
@@ -174,6 +181,7 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
     <>
       <ProductContext.Provider
         value={{
+          loading,
           products,
           setProducts,
           navigate,
