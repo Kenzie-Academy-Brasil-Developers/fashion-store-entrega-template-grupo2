@@ -4,6 +4,7 @@ import { HighlightSection } from "../components/general/HighlightSection";
 import { Hero } from "../components/home/Hero";
 import { useEffect, useState } from "react";
 import { Cart } from "../components/cart/Cart";
+import { LoadingSpinner } from "../components/general/LoadingSpinner";
 
 export const Home = () => {
   const { products } = useContext(ProductContext);

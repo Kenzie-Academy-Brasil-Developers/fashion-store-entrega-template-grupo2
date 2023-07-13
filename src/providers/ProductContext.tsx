@@ -19,18 +19,18 @@ export const ProductContext = createContext({} as IProductContext);
 export const ProductProvider = ({ children }: IProductContextProps) => {
   const { token } = useContext(UserContext);
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const [mainLoading, setMainLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const loadProducts = async () => {
-      setLoading(true);
+      setMainLoading(true);
       try {
         const { data } = await api.get("/products");
         setProducts(data);
       } catch (error: any) {
-        toast.error(error.data.response.data);
+        toast.error(error?.data?.response);
       } finally {
-        setLoading(false);
+        setMainLoading(false);
       }
     };
     loadProducts();
@@ -121,7 +121,7 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
       setProducts((products) => [...products, data]);
       toast.success(`Produto ${data.name} cadastrado com sucesso`);
     } catch (error: any) {
-      toast.error(error.response.data);
+      toast.error(error?.response?.data);
     }
   };
 
@@ -137,7 +137,7 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
       );
       toast.success("Produto deletado com sucesso");
     } catch (error: any) {
-      toast.error(error.response.data);
+      toast.error(error?.response?.data);
     }
   };
 
@@ -169,7 +169,7 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
       );
       toast.success("Produto atualizado com sucesso");
     } catch (error: any) {
-      toast.error(error.response.data);
+      toast.error(error?.response?.data);
     }
   };
 
@@ -181,7 +181,7 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
     <>
       <ProductContext.Provider
         value={{
-          loading,
+          mainLoading,
           products,
           setProducts,
           navigate,

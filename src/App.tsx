@@ -1,12 +1,8 @@
 import { RoutesMain } from "./routes/routesMain";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { useContext } from "react";
-import { ProductContext } from "./providers/ProductContext";
-import { LoadingScreen } from "./components/general/LoadingScreen";
 
 function App() {
-  const { loading } = useContext(ProductContext);
   return (
     <>
       <ToastContainer
@@ -21,7 +17,7 @@ function App() {
         pauseOnHover
         theme="light"
       />
-      {loading ? <LoadingScreen /> : <RoutesMain />}
+      <RoutesMain />
     </>
   );
 }

@@ -49,7 +49,7 @@ export interface IProductContext {
   deleteModal: RefObject<HTMLDialogElement>;
   cartCount: Number;
   cartTotal: number;
-  loading: boolean;
+  mainLoading: boolean;
 }
 
 export interface ICartProps {
