@@ -28,7 +28,9 @@ export const ProductProvider = ({ children }: IProductContextProps) => {
         const { data } = await api.get("/products");
         setProducts(data);
       } catch (error: any) {
-        toast.error(error?.data?.response);
+        toast.error(
+          "Houve algum erro com a requisição dos produtos, tente novamente mais tarde"
+        );
       } finally {
         setMainLoading(false);
       }
